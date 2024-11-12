@@ -1,16 +1,16 @@
 using System.Data;
-using Microsoft.Data.SqlClient;
 using Domain.DataBase;
+using Npgsql;
 
 namespace Infrastructure.Persitence
 {
-    public class SQLDbConnect : ISQLDbConnect
+    public class PostgresqlConnect : IPostgresqlConnect
     {
-        private SqlConnection _conn;
+        private readonly NpgsqlConnection _conn;
 
-        public SQLDbConnect(SqlConnection conn)
+        public PostgresqlConnect(string connStr)
         {
-            _conn = conn;
+            _conn = new NpgsqlConnection(connStr);
         }
 
         public void CloseConnection()
@@ -21,7 +21,7 @@ namespace Infrastructure.Persitence
             }
         }
 
-        public SqlConnection GetConnection()
+        public NpgsqlConnection GetConnection()
         {
             if (_conn.State == ConnectionState.Closed)
             {
@@ -34,7 +34,7 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
+                using var cmd = new NpgsqlCommand(query, GetConnection());
                 cmd.ExecuteNonQuery();
                 CloseConnection();
             }
@@ -48,7 +48,7 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
+                using var cmd = new NpgsqlCommand(query, GetConnection());
                 await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
                 CloseConnection();
             }
@@ -63,7 +63,7 @@ namespace Infrastructure.Persitence
             try
             {
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(query, GetConnection());
+                using var da = new NpgsqlDataAdapter(query, GetConnection());
                 da.Fill(dt);
                 CloseConnection();
                 return dt;
@@ -79,11 +79,9 @@ namespace Infrastructure.Persitence
             try
             {
                 DataTable dt = new DataTable();
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                using (SqlDataReader reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
-                {
-                    dt.Load(reader);
-                }
+                using var cmd = new NpgsqlCommand(query, GetConnection());
+                using var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false);
+                dt.Load(reader);
                 CloseConnection();
                 return dt;
             }
@@ -93,16 +91,16 @@ namespace Infrastructure.Persitence
             }
         }
 
-        public DataTable GetDataSP(string spName, SqlParameter[] param)
+        public DataTable GetDataSP(string spName, NpgsqlParameter[] param)
         {
             try
             {
                 DataTable dt = new DataTable();
-                SqlCommand cmd = new SqlCommand(spName, GetConnection());
+                using var cmd = new NpgsqlCommand(spName, GetConnection());
                 cmd.CommandType = CommandType.StoredProcedure;
                 if (param != null)
                     cmd.Parameters.AddRange(param);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                using var da = new NpgsqlDataAdapter(cmd);
                 da.Fill(dt);
                 CloseConnection();
                 return dt;
@@ -113,26 +111,23 @@ namespace Infrastructure.Persitence
             }
         }
 
-      public async Task<DataTable> GetDataSPAsync(string spName, SqlParameter[] param)
+        public async Task<DataTable> GetDataSPAsync(string spName, NpgsqlParameter[] param)
         {
             try
             {
                 DataTable dt = new DataTable();
-              
-                    SqlCommand cmd = new SqlCommand(spName, GetConnection());
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    if (param != null)
-                        cmd.Parameters.AddRange(param);
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                    {
-                        dt.Load(reader);
-                    }
-                
+                using var cmd = new NpgsqlCommand(spName, GetConnection());
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (param != null)
+                    cmd.Parameters.AddRange(param);
+                using var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false);
+                dt.Load(reader);
+                CloseConnection();
                 return dt;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener datos de procedimiento almacenado de forma asíncrona: " + ex.Message);
+                throw new Exception("Failed to get data from stored procedure asynchronously: " + ex.Message);
             }
         }
 
@@ -140,7 +135,7 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
+                using var cmd = new NpgsqlCommand(query, GetConnection());
                 cmd.ExecuteNonQuery();
                 CloseConnection();
             }
@@ -154,8 +149,8 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                await cmd.ExecuteNonQueryAsync();
+                using var cmd = new NpgsqlCommand(query, GetConnection());
+                await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
                 CloseConnection();
             }
             catch (Exception ex)

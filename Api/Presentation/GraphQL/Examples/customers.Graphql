@@ -1,0 +1,1079 @@
+query{
+  customerQuery{
+    customers{
+      customerID
+      customerName
+      division
+      buildingID
+      available
+    }
+  }
+}
+
+//Example 2
+
+{
+  "data": {
+    "customerQuery": {
+      "customers": [
+        {
+          "customerID": "430cc29b-cae4-ee11-8388-0a1401ba0f9f",
+          "customerName": "GIGAMON",
+          "division": "Computing and storage",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "1162a2ad-d3e6-ee11-8388-0a1401ba0f9f",
+          "customerName": "CIENA",
+          "division": "EMS",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "15f40b31-4196-ef11-8468-0a1401ba0f9f",
+          "customerName": "LAM",
+          "division": "LAM",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "9f7429a0-567c-ef11-8468-0a1401ba0f9f",
+          "customerName": "ZOOX",
+          "division": "EMS",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "8277e84a-180e-42b4-bd87-0a74a4048c42",
+          "customerName": "DefaultCustomer - Guadalajara",
+          "division": "DefaultDivision - Guadalajara",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "00b051a5-9de7-ee11-8388-0a1401ba0f9f",
+          "customerName": "NetApp",
+          "division": "CTO",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "32d54acb-4d7c-ef11-8468-0a1401ba0f9f",
+          "customerName": "Schneider",
+          "division": "Schneider",
+          "buildingID": "00000000-0000-0000-0000-000000000000",
+          "available": true
+        },
+        {
+          "customerID": "b6b40ebd-ead7-47b5-a0d2-63760bfa91c0",
+          "customerName": "ULTHERA",
+          "division": "ULTHERA",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "66f152e9-9eb1-4ffc-b210-c77a6e807679",
+          "customerName": "Echostar",
+          "division": "Echostar",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "919a7040-db4c-4835-97af-7b8e1b966174",
+          "customerName": "Golden Eye",
+          "division": "Golden Eye",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "9354f912-4f59-4a9c-9e3c-567d131b622d",
+          "customerName": "Philips",
+          "division": "Philips",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "b511415c-fecd-4822-a074-cffb4bdc3ca9",
+          "customerName": "3COM",
+          "division": "3COM",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "efae067d-7ab8-4dff-94c1-8c6846dcd553",
+          "customerName": "EMERSON",
+          "division": "EMERSON",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "0ad8e588-6c13-4b2a-ae0b-ea36039857a5",
+          "customerName": "EMC",
+          "division": "EMC",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "71cc3414-97f8-4580-a4be-d553268f9db7",
+          "customerName": "Alcatel",
+          "division": "Alcatel",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "1a37388b-ce54-47cc-adfe-806df48ad53f",
+          "customerName": "Ericsson",
+          "division": "Ericsson",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "6c375062-00c0-4d97-a473-73b1e41aa01c",
+          "customerName": "RIM",
+          "division": "RIM",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "ec055cc2-8b7a-4251-b2e7-0e3b71edfd65",
+          "customerName": "QUALCOMM",
+          "division": "QUALCOMM",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "0a904ac7-c79c-478b-b968-1cffe756ddb6",
+          "customerName": "Quantum",
+          "division": "Quantum",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "e41cb816-9684-4030-a529-734f51c845d4",
+          "customerName": "Avaya",
+          "division": "Avaya",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "429955a4-98e4-4801-8d66-461d975befaf",
+          "customerName": "Nokia",
+          "division": "RADIO",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "d05398a3-184e-4a65-90dc-27510fe8df31",
+          "customerName": "QLogic",
+          "division": "QLogic",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "28b7fe27-7647-4979-b2bf-c8ab1137d620",
+          "customerName": "Good Technology",
+          "division": "Good Technology",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "98db7cac-031d-457a-9c00-efbae45dd3c7",
+          "customerName": "AFC",
+          "division": "AFC",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "d4042588-02ef-4f74-b323-73fcb98db683",
+          "customerName": "LandisGyr",
+          "division": "LandisGyr",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "441f2864-b236-4d62-b69f-0add372d192d",
+          "customerName": "Trimble",
+          "division": "Trimble",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "d08c4080-8e0c-40f0-816f-44fb34b6baa6",
+          "customerName": "Seagate",
+          "division": "Seagate",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "1ebd2b50-f67d-4f99-b5e6-698afaff2340",
+          "customerName": "Whirlpool",
+          "division": "Refrigeration",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "a063bb16-34e9-4bae-8da3-f9b4fbf68a65",
+          "customerName": "Cellnet",
+          "division": "Electricity",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "4c8ed932-f682-4811-acdb-1ac5346b6c89",
+          "customerName": "Dell Docks",
+          "division": "Dell Docks",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "6d2da7d5-e959-4264-b391-3d52e16a4f33",
+          "customerName": "Dell MB",
+          "division": "Dell MB",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "ad613d82-bf2b-414c-997f-cccf8b8764bd",
+          "customerName": "Hughes",
+          "division": "TV Satellite Receptor",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "e6369540-d61e-4aeb-9159-2852eb523086",
+          "customerName": "Symbol",
+          "division": "Symbol",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "1d4ecc44-7389-49b6-ad0f-008df39a202a",
+          "customerName": "SchneiderDisabled",
+          "division": "SCHNEIDER MEX",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "1c3f7626-5e1a-4037-9957-9766cb8c4192",
+          "customerName": "VERIFONE",
+          "division": "VERIFONE",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "d52d5248-35be-41e9-80db-ba60fd6c9850",
+          "customerName": "Electrolux",
+          "division": "Electrolux",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "09564a70-605b-4d80-8fc7-2545e25f19fe",
+          "customerName": "PHILIPS D-TV",
+          "division": "DIRECT-TV",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "b50400e5-7025-4389-a1af-f35680e813e8",
+          "customerName": "NOKIASMT",
+          "division": "NOKIASMT",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "e2d08e25-05ea-49e9-ac23-f32ba6bb1882",
+          "customerName": "NOKIAIPRG",
+          "division": "NOKIAIPRG",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "0d05e25b-8af5-4ac2-9ce0-7b369f4ebf83",
+          "customerName": "NOKIA MOBILE",
+          "division": "NOKIA MOBILE",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "9f70fe3f-6f90-43c2-abd5-826ac90fd65c",
+          "customerName": "CISCODF",
+          "division": "CISCODF",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "99c98156-c796-4a2d-ac4e-e1fb0f36b32a",
+          "customerName": "ACLARA_PLS",
+          "division": "ACLARA_PLS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "ab149d91-3bf6-477e-9557-e1d4d9c162ad",
+          "customerName": "sqd",
+          "division": "Electrical meter",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "4707a7d5-3c79-4d8e-9f60-527e79dfe215",
+          "customerName": "Morpheus",
+          "division": "Morpheus",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "d3c4a4a3-9f91-4728-86bd-2d14485f6b94",
+          "customerName": "CISCO_BP",
+          "division": "CISCO_BP",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "c824fc83-713e-4e74-9188-2fd0b327f75e",
+          "customerName": "TRAIN_QM",
+          "division": "TRAIN_QM",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "63a4db3d-917d-4664-9db5-a8c57d16c72d",
+          "customerName": "TRAIN_CIQ",
+          "division": "TRAIN_CIQ",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "f540aba5-8437-44ff-adcf-280a64728b3e",
+          "customerName": "NORTEL",
+          "division": "NORTEL",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "d2226835-d377-43b1-ba52-a144544e637b",
+          "customerName": "SSN",
+          "division": "SSN",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "ff569cbd-ef1e-4811-a4d6-e07485a5458d",
+          "customerName": "JLR",
+          "division": "ESPACIAL",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "d1164a91-57b8-44a8-88e9-b5ecb6965ba0",
+          "customerName": "EMA TEST",
+          "division": "EMA",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "5c2ed4d1-ed30-46d5-95bd-7675ae7bb827",
+          "customerName": "QLOGICP",
+          "division": "SPG-p",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "475bbb9f-8638-410d-9240-8a3442a6c3fc",
+          "customerName": "QLOGIC-PRUEBA",
+          "division": "QLOGIC-DIV-PRUEBA",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "131f62c1-ae3a-4995-95da-8bc8e0cf8595",
+          "customerName": "PRUEBA2",
+          "division": "Prueba123456789",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "3b419535-3abc-4e23-8637-b8796c22574d",
+          "customerName": "CISCO SMT",
+          "division": "CISCO SMT",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "4cfdb673-e502-4402-a679-04a52a1296cc",
+          "customerName": "SCHNEIDER ROUTE1",
+          "division": "PMO",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "4528184a-ca86-4fb5-a26a-9820b8e770c2",
+          "customerName": "SCHNEIDER MEX",
+          "division": "SchneiderDisabled",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "8ab8439d-d031-4f04-a71c-ec4530e93b45",
+          "customerName": "NANSEN ",
+          "division": "NANSEN ",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "a02777eb-8c9d-4978-a016-962934f42051",
+          "customerName": "ENERI",
+          "division": "ENERI",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "c02a81ab-e03b-422f-a337-b8e117da2474",
+          "customerName": "MALENERINOUSAR",
+          "division": "MALENERINOUSAR",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "fcb99ac8-b6d4-4907-ab10-67f034a601a2",
+          "customerName": "ERICSSON_RF",
+          "division": "ERICSSON_RF",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "119a3a82-a8c1-479e-812e-5ca7dd1c6dbd",
+          "customerName": "12-CISCO",
+          "division": "12-ROUTERS",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "84f2b6a6-6495-4ff3-b675-c4ed82e141e4",
+          "customerName": "ITRON",
+          "division": "OCONEE",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "2c2fc284-136e-45cb-b00e-cba610e5acc4",
+          "customerName": "GrassValley",
+          "division": "GrassValley",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "46b1feae-be1f-4ff0-8304-28a88cf45b22",
+          "customerName": "Grass Valley USA  LLC              ",
+          "division": "Grass Valley USA  LLC              ",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "b83d3279-2b1f-4f9f-b90b-e472f186c6ab",
+          "customerName": "ASCOM",
+          "division": "ASCOM",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "a40709f0-2026-43ba-ae96-699252f6aa5e",
+          "customerName": "SGI",
+          "division": "SGI",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "5c86b937-0c86-4966-8df8-e0d27d74519a",
+          "customerName": "Technowise",
+          "division": "Technowise",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "105a6a64-967d-4e17-9da9-00e1fc801747",
+          "customerName": "Crestron",
+          "division": "Crestron",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "b8d670c4-258a-4f72-8bca-3602308af6e8",
+          "customerName": "TEAL",
+          "division": "TEAL",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "6155ce7a-4858-417c-a885-d471002c11eb",
+          "customerName": "MCLM",
+          "division": "MCLM",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "6f7d9211-e47f-4fd6-a820-f814d4905944",
+          "customerName": "CSS Systems",
+          "division": "CSS Division",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "f97f7359-632e-44c4-9e2f-3729694dec28",
+          "customerName": "Umbrella Corp",
+          "division": "Wepons",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "f470b7ee-248f-4aab-9543-c260e7445db4",
+          "customerName": "Patito",
+          "division": "Feo",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "45c4b335-b48a-4781-a777-4cc7b78ceae3",
+          "customerName": "ELAV",
+          "division": "LIZ",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "31d0555a-554a-41f1-abae-74d9ad485104",
+          "customerName": "GDApps",
+          "division": "HDSolutions",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "011d0e08-35f8-4411-8fe5-71a293c98d14",
+          "customerName": "DDN",
+          "division": "E&I",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "74c976cd-f1a2-4da4-b980-978ba314a0b7",
+          "customerName": "VIVINT",
+          "division": "SPACE MONKEY",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "4d0fdced-01b0-457c-b68d-dd1af0bc2a18",
+          "customerName": "Fresenius Medical Care",
+          "division": "Fresenius Medical Care",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "13f30f90-b842-4810-8510-a972c0a7ab66",
+          "customerName": "AMGEN",
+          "division": "AMGEN",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "39777dfa-5170-40b5-831b-feabb48652ab",
+          "customerName": "TPT",
+          "division": "TPT",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "744655d8-7ee9-4de6-80fb-4cb281af4da8",
+          "customerName": "RHEEM",
+          "division": "RHEEM",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "4fd5e512-6fcb-4e53-918e-f6e8243c357b",
+          "customerName": "PREFORMADO",
+          "division": "PREFORMADO",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "93ff167d-e153-42cf-b2ae-0f140581920c",
+          "customerName": "POWERLEY",
+          "division": "POWERLEY",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "b465bb9c-2881-4cfa-af5a-fd9fb93dc68a",
+          "customerName": "BRACCO",
+          "division": "BRACCO",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "66e5acff-db2f-42a6-96d1-7de2309a86cb",
+          "customerName": "BEVI",
+          "division": "BEVI",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "38843508-ad39-43d9-bbc8-8f4534ea7c2e",
+          "customerName": "Aerovironment",
+          "division": "QUANTIX",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "f86a6554-d984-4882-9de1-1368d288bfb8",
+          "customerName": "ROMEO POWER",
+          "division": "ROMEO POWER",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "1455f284-c3ca-4ce0-8894-a75ca55bd9ad",
+          "customerName": "GEORGIA PACIFIC",
+          "division": "GEORGIA PACIFIC",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "edfd89db-f85c-4abf-8f47-5554048b36cc",
+          "customerName": "Mattel",
+          "division": "Mattel",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "24fb6821-06bb-4baa-bcf8-15a430abf37b",
+          "customerName": "Scientific Games",
+          "division": "EMS",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "74134a58-f1f5-4206-8644-3639fa15ea8d",
+          "customerName": "WELBILT",
+          "division": "ESG",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "5f22014f-3845-4753-910c-286046f12a93",
+          "customerName": "Resideo",
+          "division": "Resideo",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "bab313a3-25da-4949-9fee-d028800651ab",
+          "customerName": "CHAMBERLAIN",
+          "division": "CGI",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "02802916-82a7-45e4-a28a-c5e839ee8c67",
+          "customerName": "MAVENIR",
+          "division": "---",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "05747d3f-d981-4d17-b193-72610649d044",
+          "customerName": "Anokiwave",
+          "division": "ANOKIWAVE, INC.",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "d3a1a419-d505-412e-b9e8-f0349baca58b",
+          "customerName": "Plenty",
+          "division": "Plenty",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "74e17be9-c51a-4c28-87b2-48ad4b015ed9",
+          "customerName": "EMA123",
+          "division": "COCINAS",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "354e54a1-1188-4c96-bb8d-a34d9459d8ec",
+          "customerName": "VERSA",
+          "division": "VERSA",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "68904007-624a-4630-92ec-9a33cb9cca8a",
+          "customerName": "MSI",
+          "division": "Optics",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "f6efa5bb-e5e1-490f-827a-571f703b3f99",
+          "customerName": "TORO",
+          "division": "TORO",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "963cfe0a-863d-45e9-a7e0-4d2c053941ce",
+          "customerName": "Bently",
+          "division": "EMS",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "936209e3-fd5b-4ae6-a137-6562d07aa1cc",
+          "customerName": "BakerHughes",
+          "division": "BakerHughes",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "94179106-5f05-440d-9b5f-6202aac955c9",
+          "customerName": "Pivotal",
+          "division": "Pivotal",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "6fed1135-c765-4d3b-b203-4b5f85ada4b5",
+          "customerName": "MSI-VIDEO",
+          "division": "MSI-VIDEO",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "dddd5f4b-bad1-4ba9-ac2a-70c2c6a37812",
+          "customerName": "Cisco DF",
+          "division": "Cisco DF",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "433adb33-5bc9-4b42-9b4b-fec8e19f813a",
+          "customerName": "IBM",
+          "division": "STO",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "27eb52b3-3100-420a-8f7e-645de2aac3e7",
+          "customerName": "TELLABS",
+          "division": "TELLABS",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": true
+        },
+        {
+          "customerID": "95b001db-c82b-4a1a-8945-09f52f9d4470",
+          "customerName": "YASKAWA",
+          "division": "Solectria",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "f6e60462-349d-4ced-bfbd-8400a71eb191",
+          "customerName": "Honeywell",
+          "division": "DEMO BOARD ASSY",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "3d62f775-5ca4-429c-8951-38ca17e0f213",
+          "customerName": "something",
+          "division": "Others",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "7bf2f47c-811e-4b89-a397-42161ba534e4",
+          "customerName": "None",
+          "division": " ",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "8459bc78-91a4-4b50-86d8-a999b37abcd3",
+          "customerName": "HP",
+          "division": "HP",
+          "buildingID": "d25b94b0-0c7f-4a6f-b1ec-6f6820a368ea",
+          "available": false
+        },
+        {
+          "customerID": "c4353076-0987-474c-8afc-e12d9bfcd16e",
+          "customerName": "Arista",
+          "division": "Networking",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "7d4c3c3f-1a1b-4d38-8df4-0b63e3d03bf3",
+          "customerName": "PopSockets LLC",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "8771b99c-476a-4b73-98a2-f657975c0a09",
+          "customerName": "GoldenEye",
+          "division": "GoldenEye",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "8eb5ba16-e5d4-493c-9d1a-e668f3be06b7",
+          "customerName": "Tesla",
+          "division": "Energy",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "9cc16aa5-b0f8-48aa-b5ed-c8bcadc6e6bd",
+          "customerName": "TMEIC",
+          "division": "Energy",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "c3efeef3-8080-4708-96ee-f2e3e3025347",
+          "customerName": "Galtronics",
+          "division": "ODAS Omni_Q",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "3125be4c-d2eb-4aba-ad31-a00450c4feab",
+          "customerName": "GENERAL ELECTRIC COMPANY",
+          "division": "GAS & OIL",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "47692fd8-b8e4-4fce-8e1e-962fbf09c795",
+          "customerName": "CADENCE",
+          "division": "ENTERPRISE & INFRASTRUCTURE DIVISION",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "e38ce62b-2bce-4578-a69e-d469c7c129c6",
+          "customerName": "Space Explorations Technologies",
+          "division": "Telecommunications",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "138d4952-a942-4c3e-be4b-fc7b7d3f3ccf",
+          "customerName": "Zoox SMT",
+          "division": "Cloud and Enterprise Infrastructure",
+          "buildingID": "62689848-305a-4ff1-b09a-55a5f57a28f9",
+          "available": true
+        },
+        {
+          "customerID": "3ed147dc-41d2-e811-80cb-000d3a04e713",
+          "customerName": "CRESTRON",
+          "division": "CRESTRON",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "5d601d5e-b307-ea11-b820-48df373e19d8",
+          "customerName": "POPSOCKET",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": false
+        },
+        {
+          "customerID": "20456e4f-a7b0-ea11-b827-48df37646ab8",
+          "customerName": "Violet Defense LLC",
+          "division": "ESG",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "1b413fab-06fe-ea11-b82c-48df37646aa8",
+          "customerName": "ODIN",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "8a3df4fe-960e-eb11-b82d-48df37646aa8",
+          "customerName": "GIGAMON",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "549e99b1-e633-eb11-b830-48df37646aa8",
+          "customerName": "VERTIV",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "4b4e7f73-da7d-eb11-b830-48df37646ab8",
+          "customerName": "JABIL_HIBE_MRO",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "7f576f40-3631-ec11-b83b-48df37646aa8",
+          "customerName": "NERIVELA",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "e80a444a-bab6-ed11-b849-48df37646ab8",
+          "customerName": "EATON",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "0491d52d-02f1-ee11-b852-48df37646ab8",
+          "customerName": "TAAVER",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "719be31e-3803-ef11-b853-48df37646ab8",
+          "customerName": "Bently Nevada",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "7a86ef8e-fd33-ef11-b857-48df37646ab8",
+          "customerName": "SPAN IO",
+          "division": "EMS",
+          "buildingID": "f9797482-4433-4947-8d28-e915bd505e86",
+          "available": true
+        },
+        {
+          "customerID": "505c8ed8-ef0f-4d67-97c1-f17269485a0c",
+          "customerName": "Robotics",
+          "division": "Robotics",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "3751be75-448f-4e60-b563-d7533b40223d",
+          "customerName": "GoPro",
+          "division": "GoPro",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "ca95ba1d-8a4a-4ab8-9b25-ff759bfd1ca7",
+          "customerName": "Enterprise",
+          "division": "Enterprise",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "00fce2c3-ba7d-47f1-bd55-5c0ab2461289",
+          "customerName": "ABC_SMT",
+          "division": "ABC_SMT",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "8a163736-cc5f-4fe9-9ce6-6fd3dc0899f0",
+          "customerName": "Blackdraft",
+          "division": "Blackdraft",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "af2b2c62-7f85-45ff-88e4-8d74f0adada8",
+          "customerName": "Nestle",
+          "division": "Purina",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "14df8299-91ce-4b52-82f7-4ccc1590d4fa",
+          "customerName": "Aloe Care Health",
+          "division": "Aloe Care Health",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "6e2b0bfd-6af1-4701-afd9-ee4ad07d5b41",
+          "customerName": "Traeger",
+          "division": "Traeger",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "5ef0701b-d0f2-4972-8514-283c3a4cd622",
+          "customerName": "TONAL",
+          "division": "TONAL",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "b9240f2d-fff8-4366-8892-3e2803c9ad5a",
+          "customerName": "ReLab",
+          "division": "ReLab",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "a9895cf5-1b04-400d-988b-bb91f9a86bcf",
+          "customerName": "Dyson",
+          "division": "Dyson",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "8b7c4b2f-e96c-41f3-b5e7-899bad7584b6",
+          "customerName": "PrimeAir",
+          "division": "PrimeAir",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "7ca6985c-ac68-4ab9-9ae2-e2cc0b43f141",
+          "customerName": "Ember",
+          "division": "Ember",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "091b14fe-69b6-46b4-91f9-a17a1d62500b",
+          "customerName": "SAMSARA",
+          "division": "DMS",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "c9be79f7-aac8-4926-a13e-e7073d79c497",
+          "customerName": "SKYDIO",
+          "division": "SKYDIO",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        },
+        {
+          "customerID": "1bb5af78-926d-4eab-a4c7-d6ae99e74c2b",
+          "customerName": "NICE",
+          "division": "Renewables and Energy Infrastructure",
+          "buildingID": "46fc02e9-0714-47e0-8439-985f91651d3d",
+          "available": true
+        }
+      ]
+    }
+  }
+}

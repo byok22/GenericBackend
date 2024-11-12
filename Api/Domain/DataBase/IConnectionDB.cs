@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Api.Domain.Models.DataBase
+namespace Domain.DataBase
 {
     public interface IConnectionDB<DBType, DBParameters> where DBType : class
     {
@@ -14,12 +10,9 @@ namespace Api.Domain.Models.DataBase
         void SaveData(string query);
         DataTable GetDataSP(string spName, DBParameters[] param);
         void ExecuteNonQuery(string query);
-
-
         Task<DataTable> GetDataAsync(string query);
         Task SaveDataAsync(string query);
         Task<DataTable> GetDataSPAsync(string spName, DBParameters[] param);
-        Task ExecuteNonQueryAsync(string query);
-        
+        Task ExecuteNonQueryAsync(string query);        
     }
 }
