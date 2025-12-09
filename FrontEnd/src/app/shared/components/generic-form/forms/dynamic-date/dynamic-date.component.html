@@ -1,0 +1,16 @@
+<form [formGroup]="customForm">
+    <div class="form-group col-md-12">  
+      <div class="form-check">
+        <label class="labelsGeneric form-check-label" for="{{field.field}}">{{field.label+' '}} </label>
+        <input ngClass="inputGeneric"
+          type="date"
+          id="{{field.field}}"
+          class="form-control"
+          formControlName="{{field.field}}"
+          (change)="onDateChange($event)"     
+        />
+        
+      </div>
+    </div>
+  </form>
+  

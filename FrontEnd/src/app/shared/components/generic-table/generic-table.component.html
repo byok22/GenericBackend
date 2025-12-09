@@ -1,0 +1,97 @@
+<div class="card custom-card">
+    <p-table 
+        #table 
+        [value]="theTable.data" 
+        [loading]="loading"
+        [dataKey]="theTable.dataKey"
+        [rows]="theTable.rowsPerPage"
+        [rowsPerPageOptions]="theTable.rowsPerPageOptions"
+        [paginator]="true"  
+        [globalFilterFields]="theTable.globalFilterFields"  
+
+      
+       
+       
+        >
+        <ng-template pTemplate="caption">
+            <div class="flex ">              
+                    <div class="cards flex-1 mx-1 text-center border-round" *ngFor="let kpi of theTable.kpi">
+                        <shared-basic-kpi [title]="kpi.title" [total]="kpi.total"></shared-basic-kpi>
+                    </div>
+              
+                    <div class="ml-auto">                    
+                        <input #searchInput pInputText type="text" (input)="table.filterGlobal(searchInput.value, 'contains')" placeholder="Search keyword" />
+                        <button type="button" pButton icon="pi pi-filter-slash" (click)="clear(table,searchInput)" class="ml-1 px-4 py-1 custom-button" style="color: rgb(255, 255, 255)" pTooltip="CSV" tooltipPosition="bottom"></button>
+                        <button type="button" pButton icon="pi pi-download" (click)="exportToCSV()" class="ml-1 px-4 py-1 custom-button" pTooltip="CSV" tooltipPosition="bottom"></button>
+                        <!-- Muestra la opción de Agregar Un Registro -->
+                        @if (showDetails) {
+                            <button type="button" pButton icon="pi pi-plus" (click)="show()" class="ml-1 px-4 py-1 custom-button" pTooltip="Add" tooltipPosition="bottom"></button>
+                        }                                     
+                    </div>
+            </div>
+            <div class="d-flex align-items-center" style="padding: .5rem;">
+                <!-- KPIs -->
+                <div class="d-flex">
+                    
+                </div>
+        
+                <!-- Search keyword input and buttons -->
+               
+            </div>
+        </ng-template>
+        
+        
+        
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th 
+                    [style.minWidth.px]="30"
+                    
+                    *ngFor="let col of theTable.columns"
+                    [class]="col.showHeader!=null&&!col.showHeader ? 'ui-table-hide-on-sm' : '' "
+                    
+                >
+                    <div class="flex align-items-center">
+                    {{ col.header }}
+                    <p-columnFilter type="text" [field]="col.field" [display]="col.header" />
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData >
+            <tr>
+                @for (col of  theTable.columns; track $index ) {
+                    <td                     
+                    [class]="col.showHeader!=null&&!col.showHeader ? 'ui-table-hide-on-sm' : '' "
+                
+                    >   
+                   
+                       @if (showDetails && $index ==0) {
+                        <button class="theButton fa fa-folder-open" styleClass="p-button-outlined px-2" (click)="show(rowData)"></button>
+                       }
+                       @if (Approval && col.field == 'approved' ) {
+                        <button class="approval-style" (click)="ApproveRow(rowData)">Approve</button>
+                       }
+                       @if (col.genericButton&&col.genericButton!='') {
+                        <button class="buttons button1" styleClass="px-2" (click)="genericButtonSend(rowData)">{{col.genericButton}}</button>
+                       }
+                       @if (Preview&&col.field == 'preview' ) {
+                        <button class="theButton fa fa-eye" styleClass="px-4" (click)="PreviewButton(rowData)" [routerLink]="['/presentation/view']"></button>
+                       }
+                       {{ rowData[col.field] }}
+                           
+                    </td>
+
+                }
+               
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td>No data found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

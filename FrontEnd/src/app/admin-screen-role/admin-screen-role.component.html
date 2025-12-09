@@ -1,0 +1,65 @@
+
+<p-toast></p-toast>
+<div class="container-fluid my-3">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h5 class="mb-0">Role Permissions Management</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label for="roleSelector" class="form-label"><strong>1. Select a Role to Manage</strong></label>
+          <p-dropdown 
+            id="roleSelector" 
+            [options]="allRoles" 
+            [(ngModel)]="selectedRole"
+            (onChange)="onRoleChange()"
+            optionLabel="text"
+            placeholder="Select a Role" 
+            [showClear]="true"
+           
+            styleClass="w-100">
+          </p-dropdown>
+        </div>
+      </div>
+
+      <div *ngIf="selectedRole">
+        <hr>
+        <h6 class="mb-3"><strong>2. Assign Screens to "{{ selectedRole.text }}"</strong></h6>
+        <div *ngIf="loadingPermissions" class="text-center">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+        <p-pickList 
+          *ngIf="!loadingPermissions"
+          [source]="sourceScreens" 
+          [target]="targetScreens" 
+          sourceHeader="Available Screens" 
+          targetHeader="Assigned Screens"
+          [dragdrop]="true" 
+          [responsive]="true"
+          sourceFilterPlaceholder="Search available..."
+          targetFilterPlaceholder="Search assigned..."
+          [sourceStyle]="{'height':'300px'}" 
+          [targetStyle]="{'height':'300px'}">
+          <ng-template let-screen pTemplate="item">
+            <div>{{ screen.screen }}</div>
+          </ng-template>
+        </p-pickList>
+      </div>
+      
+      <div *ngIf="!selectedRole" class="text-center text-muted mt-4">
+        <p><i class="pi pi-info-circle me-2"></i>Please select a role to see its permissions.</p>
+      </div>
+
+    </div>
+    <div class="card-footer text-end" *ngIf="selectedRole">
+        <button 
+            type="button" 
+            class="btn btn-primary" 
+            (click)="savePermissions()" 
+            [disabled]="loadingPermissions">
+            <i class="pi pi-save me-2"></i>Save Changes for {{ selectedRole.text }}
+        </button>
+    </div>
+  </div>
+</div>

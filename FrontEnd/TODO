@@ -1,0 +1,90 @@
+Menu Principal (esqueleto de navegación y responsabilidades):
+
+    Home
+        - Dashboard de Proyectos: seleccionar el proyecto a visualizar
+        - Resumen rápido: actividad reciente, publicaciones programadas
+
+    Catálogos
+        - Usuarios
+            - Listar / Crear / Editar / Eliminar (según permisos)
+            - Asignar roles
+        - Roles
+            - Definir permisos por rol
+            - Roles por pantalla/acción
+        - Estado (Status)
+            - Estados de página, sección y bloque
+        - Tipos de Bloque (BlockType)
+            - Definir bloques reutilizables
+
+    Proyectos
+        - Listado de Proyectos
+            - Crear / Editar / Eliminar proyecto
+            - Clonar proyecto
+        - Secciones
+            - Listar Secciones
+            - Crear Sección
+            - Editar Sección
+            - Ordenar / Organizar Secciones
+            - Plantillas de sección (opcional)
+        - Páginas
+            - Listar Páginas
+            - Crear Página
+            - Editar Página (editor WYSIWYG / bloques)
+            - Plantillas de Página
+            - Bloques / Contenido Reutilizable
+            - Versiones / Historial
+
+    Media / Assets
+        - Biblioteca de archivos (imágenes, documentos, vídeos)
+        - Subir / Organizar / Eliminar
+        - Optimización y generación de tamaños
+
+    Plantillas / Temas
+        - Gestionar templates globales y por proyecto
+        - Bloques y snippets reutilizables
+
+    Navegación
+        - Menús principales y secundarios
+        - Estructura de menús por proyecto
+
+    Publicación / Workflow
+        - Estados: borrador, pendiente, publicado
+        - Programar publicaciones
+        - Revisiones y aprobaciones (workflow editorial)
+
+    Integraciones / API
+        - API pública / privada
+        - Webhooks / Integraciones de terceros
+        - Import / Export (JSON, CSV, XML)
+
+    Seguridad / Permisos
+        - Roles avanzados y permisos granulares
+        - Autenticación / SSO (si aplica)
+        - Auditoría y logs de acceso
+
+    Mantenimiento y Recuperación
+        - Papelera (trash) y recuperación de contenido
+        - Backups y exportación periódica
+        - Logs de auditoría
+
+    Utilidades y UX
+        - Búsqueda global (por título, contenido, tags)
+        - Notificaciones del sistema
+        - Perfil de usuario y preferencias
+        - Locales / Traducciones / i18n
+        - SEO / Metadatos por página
+        - Ayuda / Documentación in-app
+
+Prioridades sugeridas (rápido MVP → mejoras):
+    1) Dashboard, Proyectos, Páginas básicas, Usuarios/Roles
+    2) Editor de páginas con bloques, Media Library
+    3) Workflows (borrador/publicación), Roles avanzados, Audit logs
+    4) Integraciones, Import/Export, Backups, Temas
+
+Notas técnicas / Consideraciones:
+    - Definir permisos mínimos necesarios por endpoint
+    - Separar configuraciones globales vs por-proyecto
+    - Considerar caché y CDN para assets
+    - Añadir tests para rutas críticas (CRUD proyectos/páginas/usuarios)
+
+¿Deseas que guarde este contenido en el archivo `TODO` ahora y haga un commit? (puedo actualizar y luego preparar un commit si quieres)

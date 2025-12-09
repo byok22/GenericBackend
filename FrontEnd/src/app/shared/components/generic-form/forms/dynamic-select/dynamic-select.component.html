@@ -1,0 +1,29 @@
+<form [formGroup]="customForm">
+  <div [hidden]="!field.show" class="form-group col-md-12">
+    <label class="labelsGeneric" for="{{field.field}}">{{field.label}}</label>
+    
+    <div class="select-wrapper">
+      <select 
+        class="form-control inputGeneric" 
+        [class.has-clear]="showClearButton"
+        [formControlName]="field.field" 
+        (change)="onSelectChange($event)">
+        
+        <option [ngValue]="null" disabled selected>Select an option</option>
+        
+        <option *ngFor="let option of field.options" [value]="option.id">
+            {{ option.text }}
+        </option>
+      </select>
+
+      <span 
+        *ngIf="showClearButton" 
+        class="clear-btn" 
+        (click)="clearValue($event)" 
+        title="Clean Selection">
+        &#10005; </span>
+    </div>
+
+    <div class="errors" *ngIf="hasError(field.field, 'required')">{{field.field}} is required.</div>
+  </div>
+</form>

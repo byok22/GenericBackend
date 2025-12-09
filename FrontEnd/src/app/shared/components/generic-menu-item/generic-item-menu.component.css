@@ -1,0 +1,102 @@
+:host {
+  display: block;
+}
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.columns1 {
+  padding: 5px;
+}
+
+
+
+.selects {
+  width: 100%;
+}
+
+.btn-block {
+  width: 100%;
+}
+.card{
+  padding-left: 2px;
+  padding-right: 2px;
+  border: 1px solid #ccc;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin-bottom: 4px;
+}
+
+.menuItems{
+  text-align: left;
+  width: 150px;
+  max-width: 200px;
+  margin-right: 2px;
+  label{
+    margin-left: 4px !important;
+    font-size: 12px !important;
+  
+  }
+    
+}
+
+
+p-calendar{
+	position: relative !important;
+	display: inline-flex !important;
+	max-width: 100% !important;
+	max-height: 30px !important;
+  font-size: 12px;
+
+  span{
+    input
+    {      
+        font-size: 12px;      
+    }           
+  }
+  
+}
+/*.custom-calendar {
+  span{
+    input{
+      font-size: 12px !important; 
+    }
+  }
+  font-size: 12px !important; /* Ajusta el tamaño de letra según tus necesidades */
+/*}*/
+
+.btn{
+  margin-top: 18px;
+  border-radius: 7px;
+ 
+  max-width: 150px;
+  height: 32px !important;
+  background-color:  #003865;
+  color: #f7f2f2;
+  
+}
+
+.custom-text {
+  margin-top: 0 !important;
+  padding-top: 0% !important;
+  margin-left: 4px;
+  input{
+
+
+    font-size: 12px !important;    
+   /* min-width: 150px !important;*/
+ 
+    height: 30px !important;
+}
+}
+
+
+.custom-calendar  {
+  margin-top: 0 !important;
+  padding-top: 0% !important;
+  margin-left: 4px;
+  height: 30px !important;
+  font-size: 12px !important;    
+  
+}

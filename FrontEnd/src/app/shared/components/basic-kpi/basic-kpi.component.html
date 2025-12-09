@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header">
+      <small *ngIf="isPbar==0" class="card-title">{{ title }}</small>
+      <small *ngIf="isPbar==1" class="card-title">{{ title }}: {{total}}%</small>
+    </div>
+    <div class="card-body">
+      <small *ngIf="isPbar==0" class="card-text" >{{ total }}</small>
+      
+      <p-progressBar *ngIf="isPbar==1" [value]="total" [showValue]="true"></p-progressBar>
+    </div>
+  </div>
+  

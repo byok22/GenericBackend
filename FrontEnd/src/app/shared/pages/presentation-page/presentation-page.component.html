@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="site-wrap-base" style="background-image: url('assets/img/logos/Presentation3.jpg');">
+      <div class="site-wrap-overlay"></div>
+      <div class="container">
+          <div class="row no-gutters slider-text align-items-center" style="margin-top: -700px !important;">
+              <div class="col-md-9">
+                  <h1 class="mb-4" style="letter-spacing:2px; padding-top: 160px; padding-left: 10px;">Image Traceability</h1>
+                  <h4 class="mb-3" style="padding-left: 10px;"> MADE <b>POSSIBLE</b> | MADE <b>BETTER</b></h4>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="container jb-card jb-border-none p-4" style="margin-top: -300px; margin-left: 20%; margin-right: 20%;">
+  
+        <!-- Header container -->
+        <div class="mt-2">
+            <p class="jb-text-primary">What is Image Traceability Portal</p>
+            <p class="pl-4"><small>Image Traceability is a system designed to back up images and other files from various equipment across different processes, providing a centralized portal to easily view and organize these images.
+            </small></p>
+        </div>
+  
+        <!-- Most visited reports -->
+        <div class="mt-2 mb-2">
+            <p class="jb-text-primary">Most visited reports</p>
+            <div class="cards-grid">
+              <div *ngFor="let card of visibleCards" class="card-item">
+                <div class="site-card-cascade">
+                    <div class="site-card-cascade-overlay">
+                        <img class="card-img-top" alt="Dashboard" src="{{card.imgSrc}}" />
+                    </div>
+                    <div class="p-3">
+                        <h6 class="site-card-cascade-Title">{{card.tittle}}</h6>
+                        <p style="height:30px;"><small>{{card.desc}}</small></p> 
+                        <div class="text-right">
+                            <a type="button btn-sm" class="links" (click)="visitPage(card.targetUrl)" >Go to report</a>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

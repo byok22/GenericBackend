@@ -1,0 +1,34 @@
+<div class="basicTable">
+  <form [formGroup]="form">
+    <input type="text" placeholder="Buscar..." formControlName="searchQuery" />
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let col of columns">{{ col.columName }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of paginatedData">
+          <td>
+            <input type="radio" [value]="item" formControlName="selectedRow"  />
+            <!-- <input type="radio" [value]="item" formControlName="selectedRow" (change)="selectRow(item)" /> -->
+          </td>
+          <td *ngFor="let col of columns">
+            {{ item[col.columnField] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+ 
+  
+  <!-- Paginación -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+  </div>
+  <button (click)="form.value.selectedRow ? selectRow(form.value.selectedRow) : null">Seleccionar</button>
+</div>

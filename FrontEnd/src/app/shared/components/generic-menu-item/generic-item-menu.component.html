@@ -1,0 +1,26 @@
+<div class="col-lg-1 col-md-2 menuItems" [ngSwitch]="item.type">
+  <ng-container *ngSwitchCase="'dropdown'">
+    <select-dropdown-2 [label]="item.labelText" [options]="item.item.options" (onChange)="item.item.onChange($event)" [selectedOption]="item.item.selectedOption.toString()"></select-dropdown-2>
+  </ng-container>
+  <ng-container *ngSwitchCase="'multi-select'">
+    <multi-select-dropdown [label]="item.labelText" [options]="item.item.options" (onChange)="item.item.onChange($event)" (onModelChange)="item.item.onModelChange($event)"></multi-select-dropdown>
+  </ng-container>
+  <ng-container *ngSwitchCase="'calendar'">
+    <label styleClass="genericLabel">{{ item.labelText }}</label>
+    <p-calendar styleClass="custom-calendar" 
+       dateFormat="dd.mm.yy" 
+       [(ngModel)]="item.item.model" [showIcon]="true" (onSelect)="item.item.onSelect($event)"></p-calendar>
+  </ng-container>
+  <ng-container *ngSwitchCase="'textbox'">
+    <label styleClass="genericLabel">{{ item.labelText }}</label>
+    <input styleClass="custom-textbox" type="text" pInputText
+       [(ngModel)]="item.item.model"  (onSelect)="item.item.onSelect($event)"/>
+  </ng-container>
+  <ng-container *ngSwitchCase="'button'">
+    <button id="buttons" class="btn btn-primary btn-block" (click)="item.item.onClick()">{{ item.labelText }}</button>
+  </ng-container>
+  
+  <ng-container *ngSwitchDefault>
+    <p>{{ item.labelText }}</p>
+  </ng-container>
+</div>   

@@ -1,0 +1,21 @@
+<!-- <sidenav-bar></sidenav-bar>
+<body-app [body]="master.body">   
+</body-app> -->
+
+
+
+<div class="master-layout">
+    <sidenav-bar [expandWidth]="'17rem'"></sidenav-bar>
+    <!-- <body-app [body]="master.body">   
+    </body-app> -->
+    <div class="master-layout-rigth-section">
+        <!-- <ot-header></ot-header> -->
+        <app-header></app-header>
+        
+        <div class="master-layout-rigth-section-content">
+          <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
+    </div>
+
+</div>

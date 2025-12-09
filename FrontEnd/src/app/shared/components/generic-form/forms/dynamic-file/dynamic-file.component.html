@@ -1,0 +1,19 @@
+<form [formGroup]="customForm">
+  <div class="form-group col-md-12">
+    <label class="labelsGeneric" for="{{field.field}}">{{field.label}}</label>
+    <div>     
+        <input
+          type="file"
+          id="{{field.field}}"
+          class="form-control"
+          ngClass="inputGeneric"
+          (change)="onFileChange($event)"
+          [required]="field.required"
+          [readonly]="field.enable === false"
+        />  
+    </div>
+
+    <!-- Display error message -->
+    <div class="errors" *ngIf="hasError(field.field, 'required')">{{field.label}} is required.</div>
+  </div>
+</form>

@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="menu">
+    <ng-container *ngFor="let item of menuItems">
+      <div 
+        class="menuItems" 
+        [ngSwitch]="item.type"
+        [ngStyle]="{ 'width': getElementWidth(item.customWidth) }"
+      >
+        <label *ngIf="item.type !== 'button'">{{ item.labelText }}</label>
+
+        <ng-container *ngSwitchCase="'dropdown'">
+          <select-dropdown [options]="item.item.options" (onChange)="item.item.onChange($event)" 
+            [selectedOption]="item.item.selectedOption.toString()">
+          </select-dropdown>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'multi-select'">
+          <multi-select-dropdown [options]="item.item.options" 
+            (onChange)="item.item.onChange($event)" 
+            (onModelChange)="item.item.onModelChange($event)">
+          </multi-select-dropdown>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'calendar'">
+          <p-calendar class="custom-calendar" dateFormat="dd.mm.yy" [(ngModel)]="item.item.model" 
+            [showIcon]="true" (onSelect)="item.item.onSelect($event)">
+          </p-calendar>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'textbox'">
+          <input class="custom-textbox" type="text" pInputText [(ngModel)]="item.item.model" 
+            (ngModelChange)="item.item.onChange($event)">
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'button'">
+          <span>&nbsp;</span>
+          <button class="btn btn-block" (click)="item.item.onClick()">{{ item.labelText }}</button>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <p>{{ item.labelText }}</p>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>

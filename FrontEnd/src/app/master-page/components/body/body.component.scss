@@ -1,0 +1,31 @@
+
+$jbl-width-sidebar: 3rem;
+$jbl-width-sidebar-collapsed: 15rem;
+$jbl-footer-height: 40px;
+$jbl-header-height: 65px;
+
+:host {
+  display: block;
+}
+
+.body{
+  width: calc(100% - $jbl-width-sidebar);
+  height: calc(100% - calc($jbl-footer-height + $jbl-header-height));
+  left: $jbl-width-sidebar;
+  z-index: 0;
+  position: absolute;
+  transition: all .1s ease;
+  padding: 0rem 0rem 0rem 0rem;
+  top: $jbl-header-height;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.body-trimmed{
+  width: calc(100% - $jbl-width-sidebar-collapsed);
+  left: $jbl-width-sidebar-collapsed;
+}
+
+.body-md-screen{
+  width: calc(100% - $jbl-width-sidebar);
+  left: $jbl-width-sidebar;
+}

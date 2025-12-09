@@ -1,3 +1,4 @@
+using AutoMapper;
 using Domain.Repositories;
 
 using Infrastructure.Repositories;
@@ -9,6 +10,8 @@ using Application.UserUseCases;
 using Application.RoleUseCases;
 using Application.AppScreenUseCases;
 using Application.AppScreenRoleUseCases;
+using Application.BuildingUseCases;
+using Application.SiteUseCases;
 
 
 
@@ -21,11 +24,15 @@ namespace Extensions
                   
          
             services.AddScoped<IUsersRepository, UsersRepository>();
-
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<IAppScreensRepository, AppScreensRepository>();
 
             services.AddScoped<IAppScreenRoleRepository, AppScreenRoleRepository>();
+
+            // Sites & Buildings
+            services.AddScoped<ISitesRepository, SitesRepository>();
+            services.AddScoped<IBuildingsRepository, BuildingsRepository>();
 
             
 
@@ -72,6 +79,20 @@ namespace Extensions
             services.AddScoped<GetAppScreenByIdUseCase>();
             services.AddScoped<GetAppScreenRolesByRoleUseCase>();
             services.AddScoped<SyncPermissionsForRoleUseCase>();
+
+            // Building UseCases
+            services.AddScoped<CreateBuildingUseCase>();
+            services.AddScoped<EditBuildingUseCase>();
+            services.AddScoped<GetAllBuildingsUseCase>();
+            services.AddScoped<GetBuildingByIdUseCase>();
+            services.AddScoped<DeleteBuildingUseCase>();
+
+            // Site UseCases
+            services.AddScoped<CreateSiteUseCase>();
+            services.AddScoped<EditSiteUseCase>();
+            services.AddScoped<GetAllSitesUseCase>();
+            services.AddScoped<GetSiteByIdUseCase>();
+            services.AddScoped<DeleteSiteUseCase>();
             
             
 
@@ -84,7 +105,7 @@ namespace Extensions
             return services;
         }
 
-        public static IServiceCollection AddServices(this IServiceCollection services)
+ public static IServiceCollection AddServices(this IServiceCollection services)
         {
             // services.AddTransient<IMsgService, MsgService>();
             // services.AddTransient<IEmailService, EmailService>();
@@ -93,7 +114,6 @@ namespace Extensions
 
             return services;
         }
-
         //AddGraphiQl
        
     }

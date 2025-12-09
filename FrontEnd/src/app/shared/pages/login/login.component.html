@@ -1,0 +1,34 @@
+<p-panel  header="Login" class="login-container">
+
+  
+  <form class="login-form" [formGroup]="loginForm" (keydown.enter)="login()">
+    <img src="assets/img/Jabil_Circuit_Logo.png" alt="Logo de la empresa" class="logo">
+    <h2>{{ title }}</h2>
+    <p-toast position="top-right" key="tr"></p-toast>
+    <div class="form-group" style="margin-top: 8px;">
+      <label class="labelsMenu" for="username">NTUser</label>
+      <input type="text" pInputText class="form-control" id="username" placeholder="Enter NT User" formControlName="ntuser">
+    </div>
+    <div class="form-group" style="margin-top: 8px;">
+      <label class="labelsMenu" for="password">Password</label>
+     
+
+      <input type="password"  pInputText class="form-control" id="password" placeholder="Enter password" formControlName="password">
+    </div>
+    <div class="form-group buttons-container">
+      <p-button [link]="true" label="Login" type="button" class="btn-login" (click)="login()"></p-button>
+      <p-button [link]="true" label="Guest" type="button" class="btn-guest" (click)="loginGuest()"></p-button>
+    </div>
+    <div class="support-version">
+      <div class="support-info">
+        <p class="m-0">Support: </p>
+        <a [href]="'mailto:'+supportEmail">Software Developer Team</a>
+      </div>
+      <div class="version-info">
+        <p class="m-0">Version: </p>
+        {{version}}
+      </div>
+    </div>
+  </form>
+
+</p-panel>

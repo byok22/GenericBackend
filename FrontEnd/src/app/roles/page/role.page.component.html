@@ -1,0 +1,33 @@
+<div class="user-card">
+    <shared-generic-title  [title]="'Roles'" ></shared-generic-title>
+    <!-- <app-generic-menu  [menuItems]="menuItems"></app-generic-menu> -->
+</div>
+<p-messages [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'500ms'"></p-messages>
+ <div class="user-card">
+    <generic-table [showDetails]="true" *ngIf="hideTable()==false" [theTable]="tableConfig" (output)="getModal($event)"  ></generic-table> 
+</div>
+
+<p-dialog
+    header="{{EditAdd()}}"
+    [(visible)]="displayMaximizable"
+    [modal]="true"
+    [style]="{width: '30vw'}"
+    [maximizable]="true"
+    [draggable]="false"
+    [resizable]="true"
+    *ngIf="displayMaximizable"
+    >           
+        <div class="left">
+           
+            <generic-form [genericForm]="genericForm"></generic-form>  
+          
+        </div>                                     
+    
+</p-dialog> 
+
+@if (showSpinner==true) {
+    <div class="text-center">
+        <i class="fa fa-spinner fa-spin fa-2x"></i>
+        <p>Loading</p>
+        </div>
+  }

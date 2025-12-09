@@ -1,0 +1,19 @@
+<form [formGroup]="customForm">
+  <div class="form-group col-md-12" [hidden]="field.show==false?true:false">
+    <label class="labelsGeneric" for="{{field.field}}">{{field.label}}</label>
+    <div>
+      <input
+        type="{{field.type}}"
+        id="{{field.field}}"
+        class="form-control"
+        [ngClass]="'inputGeneric'"
+        formControlName="{{field.field}}"
+        [required]="field.required"
+        [readonly]="field.enable==false"
+        (input)="onInputChange($event)"
+      />
+    </div>
+    <!-- Display error message -->
+    <div class="errors" *ngIf="hasError(field.field, 'required')">{{field.label}} is required.</div>
+  </div>
+</form>

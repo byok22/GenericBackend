@@ -1,0 +1,67 @@
+
+.labelsMenu{
+    font-size: 12px;
+      font-weight: 450;
+      margin: 0px;
+  
+  }
+
+  .form-group{
+    max-width: 100%;
+  }
+
+  .selects{ 
+    font-size: 12px ;
+  /*  width: 125px;
+    min-width: 50px ;
+    max-width: 125px; */
+    height: 30px;
+    text-align:justify;    
+} 
+.btn-primary{
+  background-color:  #003865;
+  border: 1px solid #003865 !important;
+  font-size: 19px;
+  border-radius: 5px;
+  padding: 5px 30px;
+  color: #f7f2f2;
+  cursor: pointer;
+  border: none;
+  margin-top: 4px;
+ // margin-right: 100px;
+  height: 40px !important;
+
+}
+.btn-primary:hover {
+  color: #003865;
+  background-color: #f7f2f2;
+  
+  
+}
+
+.btn-danger{
+  margin-top: 4px;
+  background-color:  #a70505;
+  border: 1px solid #a70505 !important;
+  font-size: 19px;
+  border-radius: 5px;
+  padding: 5px 30px;
+  color: #f7f2f2;
+  cursor: pointer;
+  border: none;
+  height: 40px !important;
+ 
+  
+}
+.btn-danger:hover {
+  color:  #a70505;
+  background-color: #f7f2f2;
+}
+
+
+
+.botons {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}

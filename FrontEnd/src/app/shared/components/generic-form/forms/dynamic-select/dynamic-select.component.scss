@@ -1,0 +1,58 @@
+
+
+  /* Estilos existentes... */
+.botons{ margin: 0; }
+.btn{ border: 0; }
+.errors{ color: red; font-size: 0.875rem; margin-top: 4px; }
+.inputGeneric{
+    width: 100% !important;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    padding: 10px 15px;
+    background-color: white;
+    /* Importante: Apariencia estándar */
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.labelsGeneric{
+    margin-top: 6px !important;
+    margin-left: 4px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* --- NUEVOS ESTILOS PARA EL EFECTO DE LIMPIAR --- */
+
+.select-wrapper {
+    position: relative; /* Necesario para que el hijo absolute se base en esto */
+    width: 100%;
+}
+
+/* Forzamos a que el select tenga espacio a la derecha para que el texto no choque con la X */
+.inputGeneric.has-clear {
+    padding-right: 35px; 
+}
+
+/* Como quitamos el 'appearance' arriba para controlar el diseño, 
+   necesitamos volver a dibujar la flecha del select o usar una imagen de fondo.
+   Si prefieres la flecha nativa, elimina 'appearance: none' arriba y ajusta la posición 'right' del .clear-btn */
+
+.clear-btn {
+    position: absolute;
+    right: 25px; /* Ajustar según donde quede la flecha nativa de tu navegador */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 10;
+    padding: 0 5px;
+}
+
+.clear-btn:hover {
+    color: red; /* Color al pasar el mouse */
+}

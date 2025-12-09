@@ -1,0 +1,123 @@
+
+<div class="sidenav" 
+    [ngClass]="GetNavStatus()"
+    (mouseenter)="Enter()"
+    (mouseleave)="Leave()"
+>
+    <!-- #region Pin Button-->
+    <div class="sidenav-header-container">
+        <button class="btn-pin pl-2" (click)="togglePinned()" [ngClass]="GetPinnedClass()">
+            <fa-icon [icon]="Iconos.faThumbtack" ></fa-icon>
+        </button>
+    </div>
+    <!--#endregion PinButton-->
+    <!-- #region Body-->
+    <div class="body-scroll body-scroll_delayed">
+        <ul class="side-nav">
+            @for (item of filteredItems; track $index) {
+                <li class="side-nav-item"  (click)="shrinkOrExpand(item)">
+                    @if (item.childrens&&item.childrens.length>0) {
+                        <a class="side-nav-link"
+                           [ngClass]="getActiveClass(item)">
+                            <fa-icon class="sidenav-link-icon" [icon]="GetIcon(item.icon||undefined)"></fa-icon>
+                            @if (navStatus !== 'Collapsed') {
+                                <span class="sidenav-link-text" @fadeInOut>
+                                    {{item.name}}
+                                </span>
+                            }
+                            @if (item.childrens &&navStatus != 'Collapsed') {
+                                <fa-icon class="menu-collapse-icon"
+                                    [icon]="item.expanded ? Iconos.faAngleDown :Iconos.faAngleRight"
+                                  ></fa-icon>
+                            }
+                        </a>
+
+                    }
+                     <!-- #region Internal/External Links -->
+                    @if (!item.childrens?.length) {
+                        @if (!item.external) {
+                            <a class="side-nav-link"
+                               [routerLink]="[item.href]"
+                               routerLinkActive="active"
+                               [routerLinkActiveOptions]="{exact: true}"
+                               (click)="shrinkItems(item)">
+                                <fa-icon [icon]="GetIcon(item.icon)" class="sidenav-link-icon"></fa-icon>
+                                @if (navStatus !== 'Collapsed') {
+                                    <span class="sidenav-link-text" @fadeInOut>
+                                        {{item.name}}
+                                    </span>
+                                }
+                            </a>
+                        } @else {
+                            <a class="side-nav-link"
+                                   [href]="item.href"
+                                   routerLinkActive="active"
+                                   [routerLinkActiveOptions]="{exact: true}"
+                                   (click)="shrinkItems(item)">
+                                    <fa-icon 
+                                        [icon]="GetIcon(item.icon,Iconos.faArrowRight)"
+                                    
+                                        class="sidenav-link-icon" ></fa-icon>
+                                    @if (navStatus !== 'Collapsed') {
+                                        <span class="sidenav-link-text" @fadeInOut>
+                                            {{item.name}}
+                                        </span>
+                                    }
+                                </a>
+    
+                        }
+
+                        
+
+                    } 
+                     <!-- #endregion Internal/External Links -->
+
+                      <!-- #region Sublevel Menu -->
+                    @if (navStatus !== 'Collapsed' && item.childrens?.length) {
+                        <div>
+                            <app-sublevel-menu
+                                [item]="item"
+                                [navStatus]="navStatus"
+                                [multiple]="multiple"
+                                [expanded]="item.expanded">
+                            </app-sublevel-menu>
+                        </div>
+                    }
+                    <!-- #endregion Sublevel Menu -->
+                    
+                                      
+                </li>
+            }
+
+        </ul>
+
+
+    </div>
+
+      <div class="status d-flex" style="margin-top: -20px;">
+        <div class="badge mx-auto" @fadeInOut [ngClass]="status.toLowerCase()">
+            @if (navStatus !== 'Collapsed') {
+                <p class="m-0 p-0 w-100">{{'Enviroment'}}: {{status.toUpperCase()}}</p>
+            }
+            @else {
+                <p class="m-0 p-0 w-25">{{status | slice:0:3 | uppercase}}</p>
+            }
+        </div>
+    </div>
+
+    <!-- #endregion -->
+      <!-- #region Status -->
+
+      <!-- 
+      <div class="status d-flex">
+        <div class="badge mx-auto" @fadeInOut [ngClass]="status.toLowerCase()">
+            @if (navStatus !== 'Collapsed') {
+                <p class="m-0 p-0 w-100">{{'Enviroment'}}: {{status.toUpperCase()}}</p>
+            }
+        </div>
+    </div>
+    -->
+    <!-- #endregion Status -->
+    
+
+</div>

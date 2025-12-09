@@ -1,0 +1,17 @@
+<div class="update-container">
+    <label for="updateMessage">Mensaje de Actualización:</label>
+    <textarea id="updateMessage" [(ngModel)]="updateMessage"></textarea>
+  
+    <div class="buttons">
+      <button (click)="confirmUpdate()">Actualizar</button>
+      <button (click)="clearForm()">Limpiar</button>
+      <button (click)="cancelUpdate()">Cancelar</button>
+    </div>
+  
+    <div class="confirmation" *ngIf="showConfirmation">
+      <p>¿Estás seguro de que deseas aplicar la actualización?</p>
+      <button (click)="applyUpdate()">Sí, actualizar</button>
+      <button (click)="cancelUpdate()">No, cancelar</button>
+    </div>
+  </div>
+  

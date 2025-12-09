@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+.master-layout {
+  height: 100% !important;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.master-layout-rigth-section {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  margin-left: var(--margin-width-app-content);
+  overflow: auto;
+  height: 100%;
+
+  .master-layout-rigth-section-content {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+   
+
+  }
+}

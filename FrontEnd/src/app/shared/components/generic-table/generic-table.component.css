@@ -1,0 +1,131 @@
+:host {
+  display: block;
+}
+:host ::ng-deep {
+  .p-progressbar {
+      height: .5rem;
+      background-color: #D8DADC;
+  
+      .p-progressbar-value {
+          background-color: #607D8B;
+      }
+  }
+}
+
+/* styles.scss o tu archivo CSS */
+.custom-button {
+  background-color: #003865; /* Cambia el color de fondo según tus preferencias */
+  border-radius: 5px;
+  height: 28px;
+  width: 3rem;
+}
+
+/* styles.scss o tu archivo CSS */
+.custom-card {
+  border: 1px solid #ccc;
+    border-radius: 2px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 1rem;
+   
+}
+.cards{
+  padding-left: 2px;
+  padding-right: 2px;
+  border: 1px solid #ccc;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+
+.p-inputtext{
+  height: 28px !important;
+  border-radius: 2px !important;
+}
+
+
+.cards {
+  padding: 0.5rem; /* Ajusta el espaciado interno de los KPIs según tus necesidades */
+  /* Otros estilos para los KPIs */
+  max-width: 120px;
+}
+p-dropdown{
+  padding: 0.5rem;
+}
+
+.ui-table-hide-on-sm{
+  display: none !important;
+}
+.theButton{
+  color: #003865;
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button1 {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.button1:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+p-table.p-element{
+  box-shadow: 1px 1px 1px 1px #d4dee1 !important;
+}
+
+
+.p-datatable-header{
+  padding: 0px !important;
+}
+
+
+.p-datatable-header .ng-star-inserted{
+  padding: 0px !important;
+
+}
+
+.custom-button[_ngcontent-ng-c180502281] {
+	background-color: #003865;
+  border-radius: 2px !important;
+}
+
+.p-datatable .p-datatable-header {
+	
+	padding: 0 !important;
+	padding-top: 1rem !important;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr {
+  border-bottom: 1px solid #eeeeee; /* Un gris muy claro y tenue */
+}
+.approval-style {
+  background-color:  rgb(0,61,107);
+  color: white;                 /* Text color */
+  border: none;                 /* No border */
+  padding: 10px 22px;           /* Size */
+  font-size: 16px;              /* Text size */
+  font-family: sans-serif;      /* Clean font */
+  border-radius: 6px;           /* Rounded corners */
+  cursor: pointer;              /* Pointer on hover */
+  transition: background-color 0.3s ease;
+}
+
+.approval-style:active {
+  background-color: #061525;    /* Even darker blue on click */
+  transform: scale(0.97);       /* Slight press effect */
+}

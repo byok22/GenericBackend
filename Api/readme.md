@@ -2,6 +2,17 @@
 
 ## Version History
 
+**v1.0.4** - 2025-12-09
+  - Completed GraphQL implementation with AppScreen, Role, and User types
+  - Added comprehensive GraphQL queries and mutations for all entities
+  - Created ObjectGraphType and InputObjectGraphType for data mapping
+  - Implemented AppScreenQuery, RoleQuery, and UserQuery with Get operations
+  - Implemented AppScreenMutation, RoleMutation, and UserMutation with CRUD operations
+  - Registered IRoleRepository in dependency injection container
+  - Added IHttpContextAccessor to resolve CurrentUserService dependencies
+  - All GraphQL operations now fully functional and documented
+  - Added example queries and mutations to README for each entity
+
  **v1.0.3** - 2025-09-30
   - Added JWT Authentication middleware in `Program.cs`
   - Integrated `UseAuthentication` and `UseAuthorization` in pipeline
@@ -135,7 +146,7 @@ The application uses a clean architecture with the following layers:
 - The GraphQL types are in the folder `Presentation\GraphQL`
 - The Controllers are in the folder `Presentation\Api`
 
-## To Generate a New Endpoint
+## To Generate a New Endpoint (REST API)
 
 1. Create the Model in the Domain Layer on `Domain\Models`
 2. Create the DTO in the Shared Layer on `Shared\Dtos`
@@ -144,24 +155,367 @@ The application uses a clean architecture with the following layers:
 5. Implement the Repository Interface on `Infrastructure\Repositories`
 6. Create the UseCase in the Application Layer on `Application\UseCases`
 7. Create the Controller in the Presentation Layer on `Presentation\Api`
+8. Register the Repository in `Extensions\ServiceCollectionExtensions.cs` in the `AddRepositories()` method
+9. Register the UseCase in `Extensions\ServiceCollectionExtensions.cs` in the `AddUseCases()` method
 
 ## For GraphQL
 
-1. Create the type in `Presentation\GraphQL\Types`
-2. Create the Query in `Presentation\GraphQL\Queries`
-3. Create the Mutation in `Presentation\GraphQL\Mutations`
+### Step-by-step to Create a New GraphQL Endpoint
 
+1. Create the DTO Model in `Shared\Dtos`
+2. Create the ObjectGraphType in `Presentation\GraphQL\Types\YourEntity\YourEntityType.cs`
+3. Create the InputObjectGraphType in `Presentation\GraphQL\Types\YourEntity\YourEntityInputType.cs`
+4. Create the Query resolver in `Presentation\GraphQL\Queries\YourEntityQuery.cs`
+5. Create the Mutation resolver in `Presentation\GraphQL\Mutation\YourEntityMutation.cs`
+6. Add the new types to `RootQuery.cs` and `RootMutation.cs`
+7. Register all services in `Extensions\ServiceCollectionExtensions.cs` using the `AddRepositories()` and `AddUseCases()` methods
 
-### Dependency Injection  Examples:
-1. Add the Dependency Injection in the `program.cs`
+### Dependency Injection Examples
 
-    ```csharp
-    builder.Services.AddTransient<IYourRepository, YourRepository>()
-    builder.Services.AddTransient<YourUseCase>()
-    builder.Services.AddTransient<YourGraphQLType>()
-    builder.Services.AddTransient<YourGraphQLQuery>()
-    builder.Services.AddTransient<YourGraphQLMutation>()
-    ```
+**Option 1: In Program.cs (not recommended - use AddRepositories/AddUseCases extensions instead)**
+```csharp
+builder.Services.AddTransient<IYourRepository, YourRepository>()
+builder.Services.AddTransient<YourUseCase>()
+builder.Services.AddTransient<YourGraphQLType>()
+builder.Services.AddTransient<YourGraphQLQuery>()
+builder.Services.AddTransient<YourGraphQLMutation>()
+```
+
+**Option 2: In ServiceCollectionExtensions.cs (RECOMMENDED)**
+```csharp
+// In Extensions\ServiceCollectionExtensions.cs
+public static IServiceCollection AddRepositories(this IServiceCollection services)
+{
+    services.AddScoped<IYourRepository, YourRepository>();
+    return services;
+}
+
+public static IServiceCollection AddUseCases(this IServiceCollection services)
+{
+    services.AddScoped<YourUseCase>();
+    return services;
+}
+
+// In Program.cs
+builder.Services.AddRepositories();
+builder.Services.AddUseCases();
+
+// GraphQL types in Program.cs
+builder.Services.AddTransient<YourType>();
+builder.Services.AddTransient<YourInputType>();
+builder.Services.AddTransient<YourQuery>();
+builder.Services.AddTransient<YourMutation>();
+```
+
+## Available GraphQL Operations
+
+### AppScreen Queries and Mutations
+
+**Get All AppScreens:**
+```graphql
+query {
+  appScreenQuery {
+    AllAppScreens {
+      AppScreenID
+      ParentAppScreenID
+      Screen
+      Url
+      SortOrder
+      Icon
+      UserID
+      Available
+    }
+  }
+}
+```
+
+**Get AppScreen by ID:**
+```graphql
+query {
+  appScreenQuery {
+    AppScreenById(id: 1) {
+      AppScreenID
+      Screen
+      Url
+      Icon
+      Available
+    }
+  }
+}
+```
+
+**Get AppScreens (List with pagination):**
+```graphql
+query {
+  appScreenQuery {
+    AppScreens {
+      AppScreenID
+      Screen
+      Url
+    }
+  }
+}
+```
+
+**Create AppScreen:**
+```graphql
+mutation {
+  appScreenMutation {
+    CreateAppScreen(appScreen: {
+      ParentAppScreenID: 0
+      Screen: "New Screen"
+      Url: "/new-screen"
+      SortOrder: 1
+      Icon: "icon-name"
+      UserID: 1
+      Available: true
+    }) {
+      AppScreenID
+      Screen
+      Url
+    }
+  }
+}
+```
+
+**Update AppScreen:**
+```graphql
+mutation {
+  appScreenMutation {
+    EditAppScreen(appScreen: {
+      AppScreenID: 1
+      ParentAppScreenID: 0
+      Screen: "Updated Screen"
+      Url: "/updated-screen"
+      SortOrder: 1
+      Icon: "icon-name"
+      UserID: 1
+      Available: true
+    }) {
+      AppScreenID
+      Screen
+      Url
+    }
+  }
+}
+```
+
+**Delete AppScreen:**
+```graphql
+mutation {
+  appScreenMutation {
+    DeleteAppScreen(id: 1) {
+      message
+      success
+    }
+  }
+}
+```
+
+### Role Queries and Mutations
+
+**Get All Roles:**
+```graphql
+query {
+  roleQuery {
+    AllRoles {
+      PKRole
+      RoleName
+      Available
+    }
+  }
+}
+```
+
+**Get Role by ID:**
+```graphql
+query {
+  roleQuery {
+    RoleById(id: 1) {
+      PKRole
+      RoleName
+      Available
+    }
+  }
+}
+```
+
+**Create Role:**
+```graphql
+mutation {
+  roleMutation {
+    CreateRole(role: {
+      RoleName: "New Role"
+      Available: true
+    }) {
+      PKRole
+      RoleName
+    }
+  }
+}
+```
+
+**Update Role:**
+```graphql
+mutation {
+  roleMutation {
+    UpdateRole(role: {
+      PKRole: 1
+      RoleName: "Updated Role"
+      Available: true
+    }) {
+      PKRole
+      RoleName
+    }
+  }
+}
+```
+
+**Delete Role:**
+```graphql
+mutation {
+  roleMutation {
+    DeleteRole(id: 1) {
+      message
+      success
+    }
+  }
+}
+```
+
+### User Queries and Mutations
+
+**Get All Users:**
+```graphql
+query {
+  userQuery {
+    AllUsers {
+      Id
+      UserName
+      NTUser
+      EmployeeNumber
+      Email
+      Role
+      Available
+    }
+  }
+}
+```
+
+**Get User by ID:**
+```graphql
+query {
+  userQuery {
+    UserById(id: 1) {
+      Id
+      UserName
+      Email
+      Role
+      Available
+    }
+  }
+}
+```
+
+**Get User by NT User:**
+```graphql
+query {
+  userQuery {
+    UserByNTUser(ntUser: "DOMAIN\\username") {
+      Id
+      UserName
+      NTUser
+      Email
+    }
+  }
+}
+```
+
+**Get User by UserName:**
+```graphql
+query {
+  userQuery {
+    UserByUserName(userName: "username") {
+      Id
+      UserName
+      Email
+      Role
+    }
+  }
+}
+```
+
+**Get User by Employee ID:**
+```graphql
+query {
+  userQuery {
+    UserByUserID(employeeID: "E123") {
+      Id
+      EmployeeNumber
+      Email
+    }
+  }
+}
+```
+
+**Create User:**
+```graphql
+mutation {
+  userMutation {
+    CreateUser(user: {
+      UserName: "newuser"
+      NTUser: "DOMAIN\\newuser"
+      EmployeeNumber: "E456"
+      Email: "newuser@example.com"
+      Role: "User"
+      Available: true
+    }) {
+      Id
+      UserName
+      Email
+    }
+  }
+}
+```
+
+**Update User:**
+```graphql
+mutation {
+  userMutation {
+    UpdateUser(user: {
+      Id: 1
+      UserName: "updateduser"
+      NTUser: "DOMAIN\\updateduser"
+      EmployeeNumber: "E456"
+      Email: "updated@example.com"
+      Role: "Admin"
+      Available: true
+    }) {
+      Id
+      UserName
+      Email
+    }
+  }
+}
+```
+
+**Delete User:**
+```graphql
+mutation {
+  userMutation {
+    DeleteUser(id: 1) {
+      message
+      success
+    }
+  }
+}
+```
+
+## GraphQL Access
+
+- **GraphiQL UI**: [https://localhost:5001/graphql](https://localhost:5001/graphql)
+- You can test all queries and mutations directly in the GraphiQL interface
+- Use the documentation panel on the right side to explore available fields and arguments
 
 
 ### Create Git Ignore for .NET Cli

@@ -1,0 +1,95 @@
+
+.footer{
+    width: calc(100%);
+    left: 50%;
+    background-color: #f6fafc;
+    color: rgb(19, 19, 99);
+    z-index: 1;
+    font-family: 'Roboto', sans-serif;
+    transition: all .3s ease;
+    padding: .3rem .5rem 0 .5rem;
+    position: fixed;
+    bottom: 0;
+    padding-left: 8%;
+    padding-right: 5%;
+    font-size: 13px;
+    box-shadow: 5px 5px 5px 5px #a5a1bc63;
+    height: 6 rem;
+    .footer-content{
+        display: flex;
+        align-items: center;
+       margin-bottom: 0.3rem;
+       margin-top: 0.2rem;
+
+        .footer-content-left{
+            padding-left: 10px;
+            align-items: end;
+            display: flex;
+            align-items: center;
+            .status-platform{
+                //margin-left: 1rem;
+                display: flex;
+                align-items: center;
+                background-color: rgb(161, 144, 144);
+                border-radius: 0.325rem;
+                padding: 0.10rem;
+                .status-platform-text{
+                    margin-left: .5rem;
+                }
+
+            }
+            .development{
+                padding: 6px;
+                //backgroun color azul
+                background-color: hsla(207, 98%, 17%, 0.178);
+                //font color adecuado
+                color: rgb(2, 2, 51);
+            }
+            .production{
+                //backgroun color verde
+                background-color: rgb(0, 128, 0);
+                //font color adecuado
+                color: rgb(255, 255, 255);
+            }
+            .staging{
+                //backgroun color azul
+                background-color: rgb(0, 0, 255);
+                //font color adecuado
+                color: rgb(255, 255, 255);
+            }
+            .test{
+                //backgroun color rojo
+                background-color: rgb(174, 0, 255);
+                //font color adecuado
+                color: rgb(255, 255, 255);
+            }
+            .error{
+                //backgroun color rojo
+                background-color: rgb(255, 0, 0);
+                //font color adecuado
+                color: rgb(255, 255, 255);
+            }
+        }
+        .footer-content-right{
+            margin-left: auto ;
+            display: flex;
+            align-items: center;
+            .footer-content-right-text{
+                margin-left: 0;
+            }
+        }
+    }
+
+}
+.footer-trimmed{
+    width: calc(100%);
+    left: 0%;
+}
+.footer-md-screen{
+    width: calc(100%);
+    left: 0%;
+}
+
+.btn{
+     border-radius: 50%;
+}

@@ -1,0 +1,296 @@
+.boxShadow{
+    box-shadow:  0px 0px 5px rgb(151, 151, 151);
+    margin: 2px;
+}
+.card-img-top{
+
+  height: 150px  !important;
+}
+
+.components{
+    background-color: white;
+    padding-bottom: 0.25rem;
+}
+.cardComponent{
+    padding-top: 10px;
+ 
+}
+
+.search-results {
+    height: 100vh; /* Establece la altura al 100% del viewport height */
+  overflow-y: scroll; /* Agrega un desplazamiento vertical si es necesario */
+  overflow-x: scroll;
+  }
+
+
+
+  .site-wrap-base {
+    width: 100%;
+    height: 580px;
+    position: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+  
+    .site-wrap-base .site-wrap-overlay {
+        position: relative;
+        width: 100%;
+        height: 580px;
+        content: '';
+       
+       
+    }
+
+
+
+    .jb-card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 2px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+      }
+      
+        .jb-card .jb-card-title {
+            text-transform: uppercase !important;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: #3c4858;
+        }
+      
+        .jb-card .jb-tooltip {
+            visibility: hidden;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+            width: 200px;
+            top: 100%;
+            left: 50%;
+            margin-left: -100px; /* Use half of the width (120/2 = 60), to center the tooltip */
+        }
+      
+        .jb-card:hover .jb-tooltip {
+            visibility: visible;
+        }
+      
+        .jb-card .jb-card-header {
+            padding-left:25px;
+            padding-right:25px;
+            position: relative;
+        }
+      
+            .jb-card .jb-card-header .jb-card-icon {
+                border-radius: 3px;
+                background-color: #2196f3;
+                padding: 15px;
+                margin-top: -20px;
+                float: left;
+                box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(80,76,175,.4);
+                color: white;
+            }
+      
+            .jb-card .jb-card-header .jb-card-icon-sm {
+                border-radius: 2px;
+                background-color: #2196f3;
+                padding: 6px;
+                margin-top: -10px;
+                margin-left: 3px;
+                height: 37px;
+                width: 37px;
+                float: left;
+                box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(80,76,175,.4);
+                color: white;
+            }
+      
+      .jb-card-m0-s0 {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+      }
+      
+      .jb-card-m0 {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+      }
+      
+        .jb-card-m0 .jb-card-header {
+            z-index: 3 !important;
+            margin: 0 15px;
+            padding: 0;
+            position: relative;
+        }
+      
+            .jb-card-m0 .jb-card-header .jb-card-icon {
+                border-radius: 3px;
+                background-color: #2196f3;
+                padding: 7px;
+                margin-top: -20px;
+                margin-right: 15px;
+                float: left;
+                box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(80,76,175,.4);
+                color: white;
+            }
+      
+        .jb-card-m0 .jb-card-title {
+            text-transform: uppercase !important;
+            font-size: 0.85rem;
+            margin-left: 15px;
+            font-weight: 300;
+            color: #3c4858;
+        }
+      
+      
+      .jb-card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+
+      
+.jb-border-none {
+    border: none;
+    border-radius: 0px;
+  }
+      
+  .jb-text-primary {
+    color: #058CC5 !important;
+  }
+
+  .slider-text {
+    position: relative;
+    height: 580px;
+  }
+  
+    .slider-text h1 {
+        font-size: 48px;
+        color: rgb(235, 241, 245);
+        line-height: 1.2;
+        font-weight: 700;
+    }
+  
+    .slider-text h4 {
+        letter-spacing: 2.5px;
+        font-size: 18px;
+        color: white;
+        line-height: 1.2;
+        font-weight: 100;
+    }
+
+
+
+    .links{
+        text-decoration: none !important;
+    }
+  
+    a{
+        text-decoration: none !important;
+    }
+  
+    .site-card-cascade {
+      /* position: relative; */
+      display: -ms-flexbox;
+      /* display: flex; */
+      -ms-flex-direction: column;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0,0,0,0);
+      border-radius: .25rem;
+      -webkit-transition: 0.4s ease-out;
+      transition: 0.4s ease-out;
+      box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.18), 0px 4px 15px rgba(0, 0, 0, 0.15);
+      }
+      
+      
+      .site-card-cascade .site-card-cascade-overlay {
+      margin-top: -1.25rem;
+      margin-right: 4%;
+      margin-left: 4%;
+      border-radius: .25rem;
+      box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.18), 0px 4px 15px rgba(0, 0, 0, 0.15);
+      }
+      
+      .site-card-cascade-Title {
+      font-family: "Roboto",sans-serif !important;
+      color: #e91e63 !important;
+      font-weight: 600 !important;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      }
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Aumenta el tamaño mínimo */
+        gap: 24px; /* Aumenta el espacio entre tarjetas */
+        padding: 16px;
+      }
+      
+      .card-item {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .site-card-cascade {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .site-card-cascade img {
+        width: 100%;
+        height: auto;
+        max-height: 200px; /* Aumenta la altura máxima de la imagen */
+        object-fit: cover;
+      }
+      
+      .site-card-cascade-Title {
+        margin-top: 10px;
+        font-size: 1.4em; /* Aumenta el tamaño de fuente */
+        color: #333;
+      }
+      
+      .links {
+        margin-top: 10px;
+        color: #058CC5;
+        text-align: right !important;
+        display: block !important;
+        //text-decoration: none;
+        cursor: pointer !important;
+      }

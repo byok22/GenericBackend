@@ -32,6 +32,14 @@ namespace Shared.AutoMap
 
         CreateMap<AppScreenRoleDTO, AppScreenRole>();
         CreateMap<AppScreenRole, AppScreenRoleDTO>();
+
+          // Building
+          CreateMap<Domain.Models.Building, Shared.Dtos.BuildingDto>();
+          CreateMap<Shared.Dtos.BuildingDto, Domain.Models.Building>();
+
+          // Site
+          CreateMap<Domain.Models.Site, Shared.Dtos.SiteDto>();
+          CreateMap<Shared.Dtos.SiteDto, Domain.Models.Site>();
         
 
                  

@@ -24,6 +24,11 @@ using Application.HealthUseCases;
 using Shared.Middleware;
 using Application.Services;
 using Extensions;
+using Presentation.GraphQL.Types.Customer;
+using Presentation.GraphQL.Types;
+using Application.AppScreenUseCases;
+using Application.RoleUseCases;
+using Application.UserUseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -104,6 +109,7 @@ builder.Services.AddScoped<LoginUseCase>();
 
 
 //Dependency Injection for Services
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ILdapService, LdapService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<LoginExceptionFilter>(); // Register the exception filter
@@ -173,12 +179,34 @@ builder.Services.AddSwaggerGen(c =>
 // Configurar GraphiQL y GraphQL
 // Registrar tipos de GraphQL
 
+// Customer Types
+builder.Services.AddTransient<CustomerType>();
+builder.Services.AddTransient<CustomerInputType>();
+builder.Services.AddTransient<CustomerQuery>();
+builder.Services.AddTransient<CustomerMutation>();
 
-// Add other types here
+// AppScreen Types
+builder.Services.AddTransient<Presentation.GraphQL.Types.AppScreen.AppScreenType>();
+builder.Services.AddTransient<Presentation.GraphQL.Types.AppScreen.AppScreenInputType>();
+builder.Services.AddTransient<AppScreenQuery>();
+builder.Services.AddTransient<AppScreenMutation>();
 
-//// Registrar esquemas de GraphQL
+// Role Types
+builder.Services.AddTransient<Presentation.GraphQL.Types.Role.RoleType>();
+builder.Services.AddTransient<Presentation.GraphQL.Types.Role.RoleInputType>();
+builder.Services.AddTransient<RoleQuery>();
+builder.Services.AddTransient<RoleMutation>();
 
-           
+// User Types
+builder.Services.AddTransient<Presentation.GraphQL.Types.User.UserType>();
+builder.Services.AddTransient<Presentation.GraphQL.Types.User.UserInputType>();
+builder.Services.AddTransient<UserQuery>();
+builder.Services.AddTransient<UserMutation>();
+
+// Generic Types
+builder.Services.AddTransient<GenericResponseType>();
+
+// Root Types
 builder.Services.AddTransient<CustomerMutation>();
 builder.Services.AddTransient<RootQuery>();
 builder.Services.AddTransient<RootMutation>();

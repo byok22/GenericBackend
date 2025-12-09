@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+.basicTable {
+  //border: 1px solid red;
+  border: 1px solid #ddd; /* Borde general para la tabla */
+  border-radius: 8px; /* Bordes redondeados para un aspecto más moderno */
+  overflow: hidden; /* Para asegurar que los bordes redondeados se muestren correctamente */
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Evita el doble borde entre celdas */
+  font-size: 18px;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px;
+}
+
+th {
+  background-color: #f4f4f4; /* Color de fondo gris claro */
+  font-weight: bold; /* Letras en negrita */
+  border-bottom: 2px solid #ccc; /* Línea de separación inferior más gruesa para encabezados */
+}
+
+td {
+  border-bottom: 1px solid #eee; /* Línea tenue entre filas */
+}
+
+tr {
+  border-bottom: 1px solid #ddd; /* Línea tenue entre filas */
+}
+
+tr:last-child td {
+  border-bottom: none; /* Sin borde en la última fila */
+}
+
+button {
+  margin-top: 10px; /* Espacio superior para el botón */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  background-color: #007bff; /* Color de fondo azul para el botón */
+  color: white; /* Color del texto del botón */
+  border: none; /* Sin borde para el botón */
+  border-radius: 5px; /* Bordes redondeados para el botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+button:hover {
+  background-color: #0056b3; /* Color de fondo azul oscuro al pasar el mouse sobre el botón */
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  line-height: 2.5;
+}

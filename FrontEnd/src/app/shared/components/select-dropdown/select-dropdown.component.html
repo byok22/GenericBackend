@@ -1,0 +1,8 @@
+<div class="form-group m-0 menuItem">
+@if (label&&label!='') {
+  <label class="labelsMenu" [for]="selectId">{{ label }}:</label>
+}  
+  <select styleClass="selects" [id]="selectId" class="selects form-control" [(ngModel)]="selectedOption" (change)="onChange.emit(selectedOption)">
+    <option *ngFor="let option of options" [value]="option.id">{{ option.text }}</option>
+  </select>
+</div>

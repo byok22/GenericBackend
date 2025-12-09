@@ -1,0 +1,18 @@
+<div class="form-group m-0">
+    <label class="labelsMenu" [for]="selectId">{{ label }}:</label>
+    <p-multiSelect
+      styleClass="selects"
+      class="custom-multi-select"
+      [options]="options"
+      [(ngModel)]="selectedOption"
+      [optionLabel]="text"
+      defaultLabel="Select one or Many"
+      [maxSelectedLabels]="1"
+      [selectedItemsLabel]="'Multiple Selects...'"
+      (onChange)="onChangeSelection()"
+      (ngModelChange)="onModelChange($event)"     
+    
+    ></p-multiSelect>
+
+  </div>
+  

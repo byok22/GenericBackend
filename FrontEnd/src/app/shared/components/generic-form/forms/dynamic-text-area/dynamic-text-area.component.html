@@ -1,0 +1,18 @@
+<form [formGroup]="customForm">
+  <div class="form-group col-md-12" [hidden]="field.show==false?true:false">
+    <label class="labelsGeneric" for="{{field.field}}">{{field.label}}</label>
+    <div>
+      <textarea        
+        id="{{field.field}}"
+        class="form-control"
+        [ngClass]="'inputGeneric'"
+        formControlName="{{field.field}}"
+        [required]="field.required"
+        [readonly]="field.enable==false"
+        (input)="onInputChange($event)"
+      ></textarea>
+    </div>
+    <!-- Display error message -->
+    <div class="errors" *ngIf="hasError(field.field, 'required')">{{field.label}} is required.</div>
+  </div>
+</form>

@@ -5,6 +5,8 @@ namespace Shared.Dtos.Login
         public bool IsAuthenticated { get; set; }
         public UserDto? User { get; set; }
         public string Token { get; set; } // Si estás generando un token JWT, por ejemplo
+
+        public string RefreshToken { get; set; }
         public string Message { get; set; }
         public string? ErrorType { get; set; }
     }

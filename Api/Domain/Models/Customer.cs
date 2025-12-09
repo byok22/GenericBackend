@@ -4,8 +4,7 @@ namespace Domain.Models
 {
     public class Customer: BasicFieldsModels
     {
-        public int Id { get; set; }     
-        //CustomerID UuId
+        public int Id { get; set; }        
         public string CustomerID { get; set; } = string.Empty;
         public string CustomerName { get; set; } = string.Empty;
         public string Division { get; set; } = string.Empty;

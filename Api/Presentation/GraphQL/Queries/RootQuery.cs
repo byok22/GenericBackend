@@ -6,8 +6,25 @@ namespace  Presentation.GraphQL.Queries
     {
         public RootQuery()
         {
-            // Add your queries here       
-            Field<CustomerQuery>("customerQuery").Resolve(context => new { });
+            // Customer Queries
+            Field<CustomerQuery>("customerQuery")
+                .Description("Customer queries")
+                .Resolve(context => new { });
+
+            // AppScreen Queries
+            Field<AppScreenQuery>("appScreenQuery")
+                .Description("AppScreen queries")
+                .Resolve(context => new { });
+
+            // Role Queries
+            Field<RoleQuery>("roleQuery")
+                .Description("Role queries")
+                .Resolve(context => new { });
+
+            // User Queries
+            Field<UserQuery>("userQuery")
+                .Description("User queries")
+                .Resolve(context => new { });
         }
     }
 }

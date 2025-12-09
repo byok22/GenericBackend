@@ -1,0 +1,11 @@
+.custom-multi-select {
+    width: 100%; /* Establece el ancho deseado para el contenedor */
+    
+    display: block !important;
+  }
+  
+  .p-multiselect-trigger {
+   
+    display: none !important;
+  }
+

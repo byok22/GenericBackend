@@ -1,0 +1,149 @@
+body {
+  background-color: #f7f7f7;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: hsl(207, 100%, 20%);
+  background-image: url("../../../../assets/img/Wallpaper.png");
+  background-color: #F2F2F2;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.login-form {
+  width: 600px;
+  max-width: 800px;
+ 
+  margin: 0 auto;
+  padding: 20px;
+ 
+ 
+  background-color: #fff;
+}
+
+
+.btn-login{
+    height: 40px;
+  color: lightcyan;
+}
+
+
+.login-form h2 {
+  margin: 0 0 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.logo {
+  width: 130px;
+  text-align: center;
+}
+
+.form-group {
+ 
+  input{
+    width: 100%;
+  }
+}
+
+/*.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.login-form button {
+  margin-top: 10px;
+}*/
+
+.login-form .btn-outline-secondary {
+  margin-left: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end; // Alinea los botones a la derecha
+  gap: 1rem; // Espacio entre los botones
+}
+
+
+.btn-container button {
+  margin: 0 10px;
+}
+
+.special--login-header {
+  z-index: 999999 !important;
+  position: fixed;
+  display: block;
+  padding: 8px;
+  height: auto;
+  width: 100%;
+  color: #fff;
+  left: 0;
+  top: 0;
+}
+
+.special--login-footer{
+  background-color: rgba(0,43,73,0.80);
+  z-index: 999999 !important;
+  position: fixed;
+  display: block;
+  padding: 5px;
+  height: auto;
+  width: 100%;
+  color: #fff;
+  bottom: 0;
+  left: 0;
+}
+
+.support-version {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.support-info, .version-info {
+  display: flex;
+  align-items: center;
+}
+
+.support-info a {
+  margin-left: 5px;
+  color: #007bff;
+}
+
+.version-info p {
+  margin-right: 5px;
+}
+
+.support-version {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.support-info,
+.version-info {
+  display: flex;
+  align-items: center;
+}
+
+.support-info a {
+  margin-left: 5px;
+  color: #007bff;
+}
+
+.version-info p {
+  margin-right: 5px;
+}

@@ -1,0 +1,34 @@
+<html>
+  <div class="home-page-header">Projects Editor</div>
+  <div class="home-page-text"> Welcome to our page.</div>
+
+  <div class="container d-flex justify-content-center mb-4">
+    <div class="input-group rounded-search w-50">
+      <input
+        type="text"
+        class="form-control rounded-pill"
+        placeholder="Search a project..."
+        aria-label="Buscar proyecto"
+        [(ngModel)]="searchTerm"
+        (input)="filterProjects()"
+        style="box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+               rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
+      />
+    </div>
+  </div>
+
+  <div class="ag-format-container">
+    <div class="ag-courses_box">
+      <div *ngFor="let project of filteredProjects" class="ag-courses_item">
+        <a
+          [routerLink]="['/presentation/view']"
+          class="ag-courses-item_link"
+          (click)="selectProject(project)"
+        >
+          <div class="ag-courses-item_bg"></div>
+          <div class="ag-courses-item_title">{{ project.projectName }}</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</html>

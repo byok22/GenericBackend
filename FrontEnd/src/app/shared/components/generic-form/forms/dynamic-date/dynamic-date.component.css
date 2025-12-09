@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+/* Aquí puedes añadir estilos personalizados para tu componente de fechas */
+.form-check {
+ 
+  align-items: center;
+}
+
+.form-control {
+  width: 100%;
+  margin-right: 10px;
+}
+.inputGeneric{
+  width: 100% !important;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.labelsGeneric{
+
+  margin-top: 6px;
+  margin-left: 4px;
+  margin-bottom: 4px;
+  display: block;
+}
