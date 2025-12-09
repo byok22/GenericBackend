@@ -1,8 +1,9 @@
 using Application.CustomerUseCases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Dtos;
 using Shared.Response;
-using System;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Presentation.Api
 {
@@ -15,21 +16,25 @@ namespace Presentation.Api
         private readonly GetAllCustomersUseCase _getAllCustomers;
         private readonly UpdateCustomerUseCase _updateCustomerUseCase;
         private readonly DeleteCustomerUseCase _deleteCustomerUseCase;
+        private readonly ILogger<CustomersController> _logger;
 
         public CustomersController(
             CreateCustomerUseCase createCustomerUseCase,
             GetCustomerByIdUseCase getCustomerById,
             GetAllCustomersUseCase getAllCustomers,
             UpdateCustomerUseCase updateCustomerUseCase,
-            DeleteCustomerUseCase deleteCustomerUseCase)
+            DeleteCustomerUseCase deleteCustomerUseCase,
+            ILogger<CustomersController> logger
+            )
         {
             _createCustomerUseCase = createCustomerUseCase;
             _getCustomerById = getCustomerById;
             _getAllCustomers = getAllCustomers;
             _updateCustomerUseCase = updateCustomerUseCase;
             _deleteCustomerUseCase = deleteCustomerUseCase;
+            _logger = logger;
         }
-
+        [Authorize(Roles = "Admin,")]  // This is an example of how to use the Authorize attribute
         [HttpPost("create")]
         public async Task<ActionResult<GenericResponse>> CreateCustomer(CustomerDto customer)
         {
@@ -40,11 +45,12 @@ namespace Presentation.Api
             }
             catch (Exception ex)
             {
-                // Log the exception (you can use a logging framework here)
+                _logger.LogError(ex, "Error creating customer");
                 return StatusCode(500, new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
         }
 
+        [Authorize] // This is an example of how to use the Authorize attribute with roles
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerDto>> GetCustomerById(int id)
         {
@@ -55,12 +61,13 @@ namespace Presentation.Api
             }
             catch (Exception ex)
             {
-                // Log the exception (you can use a logging framework here)
+                _logger.LogError(ex, "Error getting customer by id");
                 return StatusCode(500, new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
         }
 
         [HttpGet("all")]
+         [OutputCache(Duration = 60)] // Cache por 60 segundos
         public async Task<ActionResult<List<CustomerDto>>> GetAllCustomers()
         {
             try
@@ -70,7 +77,7 @@ namespace Presentation.Api
             }
             catch (Exception ex)
             {
-                // Log the exception (you can use a logging framework here)
+                _logger.LogError(ex, "Error getting all customers");
                 return StatusCode(500, new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
         }
@@ -85,7 +92,7 @@ namespace Presentation.Api
             }
             catch (Exception ex)
             {
-                // Log the exception (you can use a logging framework here)
+                _logger.LogError(ex, "Error updating customer");
                 return StatusCode(500, new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
         }
@@ -100,7 +107,7 @@ namespace Presentation.Api
             }
             catch (Exception ex)
             {
-                // Log the exception (you can use a logging framework here)
+                _logger.LogError(ex, "Error deleting customer");
                 return StatusCode(500, new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
         }

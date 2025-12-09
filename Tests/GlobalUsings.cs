@@ -1,1 +1,9 @@
 global using Xunit;
+global using Moq;
+global using FluentAssertions;
+global using AutoMapper;
+global using Application.AppScreenUseCases;
+global using Application.RoleUseCases;
+global using Application.AppScreenRoleUseCases;
+global using Domain.Repositories;
+global using Shared.Dtos;

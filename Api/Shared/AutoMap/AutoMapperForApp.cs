@@ -9,13 +9,31 @@ namespace Shared.AutoMap
 {
     public class AutoMapperForApp: Profile
     {
-        public AutoMapperForApp()
-        {
+    public AutoMapperForApp()
+    {
 
-          //mapper for convert customer to customerDto
-          CreateMap<Customer, CustomerDto>();
-          //mapper for convert customerDto to customer
-          CreateMap<CustomerDto, Customer>();
+        //mapper for convert customer to customerDto
+        CreateMap<Customer, CustomerDto>();
+        //mapper for convert customerDto to customer
+        CreateMap<CustomerDto, Customer>();
+          
+            //mapper for User to UserDto
+        CreateMap<User, UserDto>();
+        //mapper for UserDto to User
+        CreateMap<UserDto, User>();
+
+        //mapper for Role to RoleDto 
+        CreateMap<Role, RoleDto>();
+        //mapper for RoleDto to Role 
+        CreateMap<RoleDto, Role>();
+
+          CreateMap<AppScreenDto, AppScreen>();
+        CreateMap<AppScreen, AppScreenDto>();
+
+        CreateMap<AppScreenRoleDTO, AppScreenRole>();
+        CreateMap<AppScreenRole, AppScreenRoleDTO>();
+        
+
                  
             
         }

@@ -12,7 +12,7 @@ namespace Application.CustomerUseCases
 
         public async Task<CustomerDto> Execute(string customerID)
         {
-            var customer = await _repository.GetCustomerByCustomerIDAsync(customerID);
+            var customer = await _repository.GetByUuidAsync(customerID);
          
 
             return _mapper.Map<CustomerDto>(customer);

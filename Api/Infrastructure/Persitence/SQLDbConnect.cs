@@ -1,4 +1,5 @@
 using System.Data;
+using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Domain.DataBase;
 
@@ -6,41 +7,34 @@ namespace Infrastructure.Persitence
 {
     public class SQLDbConnect : ISQLDbConnect
     {
-        private SqlConnection _conn;
+        private readonly string _connectionString;
 
-        public SQLDbConnect(SqlConnection conn)
+        public SQLDbConnect(string connectionString)
         {
-            _conn = conn;
+            _connectionString = connectionString;
         }
 
-        public void CloseConnection()
+        private SqlConnection CreateConnection()
         {
-            if (_conn.State == ConnectionState.Open)
-            {
-                _conn.Close();
-            }
-        }
-
-        public SqlConnection GetConnection()
-        {
-            if (_conn.State == ConnectionState.Closed)
-            {
-                _conn.Open();
-            }
-            return _conn;
+            return new SqlConnection(_connectionString);
         }
 
         public void ExecuteNonQuery(string query)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                cmd.ExecuteNonQuery();
-                CloseConnection();
+                using (var conn = CreateConnection())
+                {
+                    conn.Open();
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to execute non-query: " + ex.Message);
+                throw new Exception($"Error al ejecutar la consulta: {ex.Message}", ex);
             }
         }
 
@@ -48,13 +42,18 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
-                CloseConnection();
+                using (var conn = CreateConnection())
+                {
+                    await conn.OpenAsync().ConfigureAwait(false);
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to execute non-query asynchronously: " + ex.Message);
+                throw new Exception($"Error al ejecutar la consulta async: {ex.Message}", ex);
             }
         }
 
@@ -62,15 +61,20 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(query, GetConnection());
-                da.Fill(dt);
-                CloseConnection();
-                return dt;
+                using (var conn = CreateConnection())
+                {
+                    conn.Open();
+                    using (var da = new SqlDataAdapter(query, conn))
+                    {
+                        var dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to get data: " + ex.Message);
+                throw new Exception($"Error al obtener datos: {ex.Message}", ex);
             }
         }
 
@@ -78,90 +82,98 @@ namespace Infrastructure.Persitence
         {
             try
             {
-                DataTable dt = new DataTable();
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                using (SqlDataReader reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
+                using (var conn = CreateConnection())
                 {
-                    dt.Load(reader);
-                }
-                CloseConnection();
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to get data asynchronously: " + ex.Message);
-            }
-        }
-
-        public DataTable GetDataSP(string spName, SqlParameter[] param)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                SqlCommand cmd = new SqlCommand(spName, GetConnection());
-                cmd.CommandType = CommandType.StoredProcedure;
-                if (param != null)
-                    cmd.Parameters.AddRange(param);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                CloseConnection();
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to get data from stored procedure: " + ex.Message);
-            }
-        }
-
-      public async Task<DataTable> GetDataSPAsync(string spName, SqlParameter[] param)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-              
-                    SqlCommand cmd = new SqlCommand(spName, GetConnection());
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    if (param != null)
-                        cmd.Parameters.AddRange(param);
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    await conn.OpenAsync().ConfigureAwait(false);
+                    using (var cmd = new SqlCommand(query, conn))
+                    using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
                     {
+                        var dt = new DataTable();
                         dt.Load(reader);
+                        return dt;
                     }
-                
-                return dt;
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener datos de procedimiento almacenado de forma asíncrona: " + ex.Message);
+                throw new Exception($"Error al obtener datos async: {ex.Message}", ex);
+            }
+        }
+
+        public DataTable GetDataSP(string spName, SqlParameter[] parameters = null)
+        {
+            try
+            {
+                using (var conn = CreateConnection())
+                {
+                    conn.Open();
+                    using (var cmd = new SqlCommand(spName, conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (parameters != null)
+                            cmd.Parameters.AddRange(parameters);
+
+                        using (var da = new SqlDataAdapter(cmd))
+                        {
+                            var dt = new DataTable();
+                            da.Fill(dt);
+                            return dt;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener datos del SP: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<DataTable> GetDataSPAsync(string spName, SqlParameter[] parameters = null)
+        {
+            try
+            {
+                using (var conn = CreateConnection())
+                {
+                    await conn.OpenAsync().ConfigureAwait(false);
+                    using (var cmd = new SqlCommand(spName, conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (parameters != null)
+                            cmd.Parameters.AddRange(parameters);
+
+                        using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
+                        {
+                            var dt = new DataTable();
+                            dt.Load(reader);
+                            return dt;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener datos del SP async: {ex.Message}", ex);
             }
         }
 
         public void SaveData(string query)
         {
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                cmd.ExecuteNonQuery();
-                CloseConnection();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to save data: " + ex.Message);
-            }
+            ExecuteNonQuery(query);
         }
 
         public async Task SaveDataAsync(string query)
         {
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, GetConnection());
-                await cmd.ExecuteNonQueryAsync();
-                CloseConnection();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to save data asynchronously: " + ex.Message);
-            }
+            await ExecuteNonQueryAsync(query);
+        }
+
+        public SqlConnection GetConnection()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CloseConnection()
+        {
+            throw new NotImplementedException();
         }
     }
 }

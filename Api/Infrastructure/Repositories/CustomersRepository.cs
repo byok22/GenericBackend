@@ -5,7 +5,6 @@ using Domain.Repositories;
 using System.Data;
 using Microsoft.Data.SqlClient;
 using Domain.DataBase;
-using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Repositories
 {
@@ -34,14 +33,14 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@CreatedBy", entity.CreatedBy ?? (object)DBNull.Value)
                 };
 
-                DataTable result = await _dbConnect.GetDataSPAsync("AddCustomer", parameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_AddCustomer", parameters);
 
                 return new Customer
                 {
                     Id = result.Rows[0].Field<int>("Id"),
                     CustomerID = result.Rows[0].Field<Guid>("CustomerID").ToString(),
-                    CustomerName = result.Rows[0].Field<string>("CustomerName"),
-                    Division = result.Rows[0].Field<string>("Division"),
+                    CustomerName = result.Rows[0].Field<string>("CustomerName") ?? string.Empty,
+                    Division = result.Rows[0].Field<string>("Division") ?? string.Empty,
                     BuildingID = result.Rows[0].Field<Guid>("BuildingID").ToString(),  
                     Available = result.Rows[0].Field<bool>("Available"),
                     CreatedAt = result.Rows[0].Field<DateTime>("CreatedAt"),
@@ -75,7 +74,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                DataTable result = await _dbConnect.GetDataSPAsync("GetAllCustomers", null);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_GetAllCustomers", null);
                 List<Customer> customersList = new List<Customer>();
 
                 foreach (DataRow row in result.Rows)
@@ -112,7 +111,7 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@Id", id)
                 };
 
-                DataTable result = await _dbConnect.GetDataSPAsync("GetCustomerById", parameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_GetCustomerById", parameters);
 
                 if (result.Rows.Count == 0 || result.Rows[0].Field<int?>("Id") == null)
                 {
@@ -123,16 +122,16 @@ namespace Infrastructure.Repositories
 
                 return new Customer
                 {
-                    Id = row.Field<int>("Id"),
-                    CustomerID = row.Field<Guid>("CustomerID").ToString(),
-                    CustomerName = row.Field<string>("CustomerName"),
-                    Division = row.Field<string>("Division"),
-                    BuildingID = row.Field<Guid>("BuildingID").ToString(),
-                    Available = row.Field<bool>("Available"),
-                    CreatedAt = row.Field<DateTime>("CreatedAt"),
-                    UpdatedAt = row.Field<DateTime>("UpdatedAt"),
-                    UpdatedBy = row.Field<string>("UpdatedBy"),
-                    CreatedBy = row.Field<string>("CreatedBy")
+                    Id = row.Field<int?>("Id") ?? 0,
+                    CustomerID = row.Field<Guid?>("CustomerID")?.ToString() ?? Guid.Empty.ToString(),
+                    CustomerName = row.Field<string>("CustomerName") ?? string.Empty,
+                    Division = row.Field<string>("Division") ?? string.Empty,
+                    BuildingID = row.Field<Guid?>("BuildingID")?.ToString() ?? Guid.Empty.ToString(),
+                    Available = row.Field<bool?>("Available") ?? false,
+                    CreatedAt = row.Field<DateTime?>("CreatedAt") ?? DateTime.MinValue,
+                    UpdatedAt = row.Field<DateTime?>("UpdatedAt") ?? DateTime.MinValue,
+                    UpdatedBy = row.Field<string>("UpdatedBy") ?? string.Empty,
+                    CreatedBy = row.Field<string>("CreatedBy") ?? string.Empty
                 };
             }
             catch (Exception ex)
@@ -156,7 +155,7 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@CreatedBy", entity.CreatedBy ?? (object)DBNull.Value)
                 };
 
-                DataTable result = await _dbConnect.GetDataSPAsync("UpdateCustomer", parameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_UpdateCustomer", parameters);
 
                 return new DBResponse
                 {
@@ -179,7 +178,7 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@Id", entity.Id)
                 };
 
-                DataTable result = await _dbConnect.GetDataSPAsync("RemoveCustomer", parameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_RemoveCustomer", parameters);
 
                 return new DBResponse
                 {
@@ -194,7 +193,7 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<Customer> GetCustomerByCustomerIDAsync(string customerID)
+        public async Task<Customer> GetCustomerByExternalCustomerIDAsync(string customerID)
         {
             try
             {
@@ -202,7 +201,7 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@CustomerID", SqlDbType.UniqueIdentifier) { Value = Guid.Parse(customerID) }
                 };
 
-                DataTable result = await _dbConnect.GetDataSPAsync("GetCustomerByUUID", parameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_GetCustomerByUUID", parameters);
 
                 if (result.Rows.Count == 0 || result.Rows[0].Field<int?>("Id") == null)
                 {
@@ -227,8 +226,8 @@ namespace Infrastructure.Repositories
                 {
                     Id = row.Field<int>("Id"),
                     CustomerID = row.Field<Guid>("CustomerID").ToString(),
-                    CustomerName = row.Field<string>("CustomerName"),
-                    Division = row.Field<string>("Division"),
+                    CustomerName = row.Field<string>("CustomerName") ?? string.Empty,
+                    Division = row.Field<string>("Division")?? string.Empty,
                     BuildingID = row.Field<Guid>("BuildingID").ToString(),
                     Available = row.Field<bool>("Available"),
                     CreatedAt = row.Field<DateTime>("CreatedAt"),
@@ -250,7 +249,7 @@ namespace Infrastructure.Repositories
             {
                 SqlParameter[] sqlParameters = new SqlParameter[1];
                 sqlParameters[0] = new SqlParameter("@CustomerID", SqlDbType.UniqueIdentifier) { Value = Guid.Parse(UuId) };
-                DataTable result = await _dbConnect.GetDataSPAsync("GetCustomerByUUID", sqlParameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_GetCustomerByUUID", sqlParameters);
 
                 if (result.Rows.Count == 0 || result.Rows[0].Field<int?>("Id") == null)
                 {
@@ -288,7 +287,7 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@CustomerName", customerName),               
                 };
 
-                DataTable result = await _dbConnect.GetDataSPAsync("GetCustomerByName", parameters);
+                DataTable result = await _dbConnect.GetDataSPAsync("up_GetCustomerByName", parameters);
 
                 if (result.Rows.Count == 0 || result.Rows[0].Field<int?>("Id") == null)
                 {
@@ -301,8 +300,8 @@ namespace Infrastructure.Repositories
                 {
                     Id = row.Field<int>("Id"),
                     CustomerID = row.Field<Guid>("CustomerID").ToString(),
-                    CustomerName = row.Field<string>("CustomerName"),
-                    Division = row.Field<string>("Division"),
+                    CustomerName = row.Field<string>("CustomerName")?? string.Empty,
+                    Division = row.Field<string>("Division")?? string.Empty,
                     BuildingID = row.Field<Guid>("BuildingID").ToString(),            
                     Available = row.Field<bool>("Available"),
                     CreatedAt = row.Field<DateTime>("CreatedAt"),
@@ -316,6 +315,11 @@ namespace Infrastructure.Repositories
                 _logger.LogError(ex, "Error getting customer by name");
                 throw;
             }
+        }
+
+        public Task<DBResponse> Health()
+        {
+            throw new NotImplementedException();
         }
     }
 }
