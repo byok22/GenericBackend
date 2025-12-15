@@ -2,6 +2,11 @@
   display: block;
 }
 
+
+
+
+
+
 .user-card {
   margin-left: 15%;
   margin-top: 2px;
@@ -10,4 +15,17 @@
     margin-top: 1%;
 
   }
+}
+
+ 
+/* Apunta al contenedor interno que solo existe cuando hay mensajes */
+:host ::ng-deep p-messages .p-messages {
+    margin-left: 15% !important;
+    margin-right: 15% !important;
+    margin-bottom: 10px; /* Un pequeño espacio antes de la tabla */
+}
+
+/* Opcional: Si quieres que el texto de la alerta no se vea gigante */
+:host ::ng-deep p-messages .p-message-summary {
+    font-weight: bold;
 }

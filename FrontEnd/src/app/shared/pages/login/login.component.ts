@@ -9,6 +9,9 @@ import { PrimengModule } from '../../modules/primeng.module';
 import { AppScreenService } from '../../../app-screens/services/app-screen.service';
 import { AuthService } from '../../services/auth.service'; // Asegúrate de que la ruta sea correcta
 import { VersionService } from '../../services/version.service'; // Asegúrate de que la ruta sea correcta
+import { SiteCatalogoService } from '../../../sites/services/site-catalogo.service';
+import { LocalStorageService } from '../../services/localStorage.service';
+import { SiteDto } from '../../../sites/interfaces/site-dto';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +26,7 @@ export class LoginComponent implements OnInit {
   version: string = '0.0.0';
   supportEmail: string = '';
   loginForm!: FormGroup;
+  sites: SiteDto[] = [];
 
   constructor(
     private router: Router,
@@ -32,6 +36,8 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService,
     private versionService: VersionService,
     private appScreenService: AppScreenService
+    ,private siteService: SiteCatalogoService
+    ,private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -39,6 +45,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       ntuser: ['', Validators.required],
       password: ['', Validators.required],
+      site: [null, Validators.required]
+    });
+
+    // Cargar sitios disponibles para seleccionar en login
+    this.siteService.GetAllSites().subscribe({
+      next: (s) => this.sites = s,
+      error: (err) => console.error('Error cargando sitios', err)
     });
   }
 
@@ -59,6 +72,13 @@ export class LoginComponent implements OnInit {
           // Guardar usuario y token
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('token', token);
+
+          // Guardar sitio seleccionado
+          const selectedSite = this.loginForm.value.site;
+          if (selectedSite) {
+            this.localStorageService.setSite(selectedSite);
+            localStorage.setItem('selectedSite', JSON.stringify(selectedSite));
+          }
 
           if (refreshToken) {
             localStorage.setItem('refreshToken', refreshToken);

@@ -11,7 +11,7 @@
 
   }
 }
- 
+
 /* Apunta al contenedor interno que solo existe cuando hay mensajes */
 :host ::ng-deep p-messages .p-messages {
     margin-left: 15% !important;

@@ -3,7 +3,25 @@
     <a class="navbar-brand" href="#">
       <img src="../../../../assets/img/Jabil_Circuit_Logo.png" alt="logo" width="150" height="25">
     </a>
-    <div class="row">
+    <div class="header-right">
+      <div class="site-group fade-in" *ngIf="selectedSiteName">
+        <div class="current-site-badge">
+          <span class="site-label">Site:</span>
+          <span class="site-value">
+            <i class="pi pi-building site-icon"></i>
+            {{ selectedSiteName }}
+          </span>
+        </div>
+        
+      <button pButton 
+              type="button" 
+              class="p-button-outlined p-button-secondary p-button-sm change-site-btn" 
+              label="Change" 
+              icon="pi pi-sync"
+              (click)="router.navigate(['/login'])">
+      </button>
+  </div>
+
       <div class="head-user-avatar-container">
         <div>
           <!-- cambié el click a onUserButtonClick -->
@@ -36,16 +54,16 @@
       <label><strong>User:</strong></label>
       <p>{{ userID }}</p>
     </div>
-    <div class="p-field">
+    <!-- <div class="p-field">
       <label><strong>NtUser:</strong></label>
       <p>{{ userInfo?.NTUser }}</p>
-    </div>
+    </div> -->
     <div class="p-field">
       <label><strong>Role:</strong></label>
       <p>{{ userInfo?.Role }}</p>
     </div>
   </div>
-  <p-footer>
+  <!-- <p-footer>
     <button pButton type="button" label="Close" class="user-info" icon="pi pi-times" (click)="showUserDialog = false"></button>
-  </p-footer>
+  </p-footer> -->
 </p-dialog>

@@ -20,26 +20,24 @@ import { GenericFormInterface } from '../../shared/components/generic-form/gener
 import { GenericFormConcretBuilder } from '../../shared/components/generic-form/builder/generic-form-concret-builder';
 import { GenericStatus } from '../../shared/enums/generic-status.enum';
 import { FormBuilder } from '@angular/forms';
-//import { UsersService } from '../../../users/services/users.service';
 import { MessageService } from 'primeng/api';
 
 import { GenericTableConcretBuilder } from '../../shared/components/generic-table/builder/generic-table-concret-builder';
-import { UserDto } from '../interfaces/user-dto';
-import { UserService } from '../services/user.service';
-import { RoleService } from '../services/role.service';
+import { BuildingDto } from '../interfaces/building-dto';
+import { BuildingCatalogoService } from '../services/building-catalogo.service';
 import { DropdownsService } from '../../common/service/dropdowns.service';
 import { GenericPageTableMenuForm } from '../../common/interfaces/generic-page-table-menu-form';
+import { SiteCatalogoService } from '../../sites/services/site-catalogo.service';
 
 
 //#endregion Imports
 
 //#region  Inits
 @Component({
-  selector: 'users-page',
+  selector: 'building-page',
   standalone: true,
   imports: [
     CommonModule, 
-    //GenericMenuComponent, 
     GenericTableComponent, 
     HttpClientModule, 
     GenericTitleComponent, 
@@ -48,55 +46,42 @@ import { GenericPageTableMenuForm } from '../../common/interfaces/generic-page-t
     FontAwesomeModule
   ],
   providers: [DatePipe, DropdownsService, MessageService],
-  templateUrl: './users.page.component.html',
-  styleUrl: './users.page.component.css',
+  templateUrl: './building.page.component.html',
+  styleUrl: './building.page.component.css',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<UserDto> {
+export class BuildingsPageComponent implements OnInit, GenericPageTableMenuForm<BuildingDto> {
 
-  builderTable: GenericTableConcretBuilder<UserDto>;
+  builderTable: GenericTableConcretBuilder<BuildingDto>;
 
   constructor(
-    private service: UserService,
-    private roleService: RoleService,
-    //private userService: UsersService,
+    private service : BuildingCatalogoService,
     private serviceTable: TableBuilderFactoryService,  
+    private siteService: SiteCatalogoService,
     private fb: FormBuilder,
     private _message: MessageService ,  
   ) {
     this.FillMenu();
     this.ConfigMenu();
-    this.GetDropdowns();
-    this.builderTable = this.serviceTable.createBuilder<UserDto>();
+      this.GetDropdowns();
+    this.builderTable = this.serviceTable.createBuilder<BuildingDto>();
   }
 
-  GetDropdowns() {
-    this.roleService.getRolesDropdown().subscribe({
-      next: (role) => {
-        this.roleDropdown = role;
-      }
-    });
-  }
+  buildingDropdown: SelectOption[] = [];
 
-  roleDropdown: SelectOption[] = [];
-
-  dataForm: WritableSignal<UserDto> = signal({
-    id: 0,
-    userName: '',
-    ntUser: '',
-    //employeeNumber: '',
-    email: '',
-    role: '',
+  dataForm: WritableSignal<BuildingDto> = signal({
+    buildingID: 0,
+    name: '',
+    description: '',
+    siteID: 0,
     available: false
   });
 
-  dataFormTemp: WritableSignal<UserDto> = signal({
-    id: 0,
-    userName: '',
-    ntUser: '',
-    //employeeNumber: '',
-    email: '',
-    role: '',
+  dataFormTemp: WritableSignal<BuildingDto> = signal({
+    buildingID: 0,
+    name: '',
+    description: '',
+    siteID: 0,
     available: false
   });
 
@@ -109,6 +94,18 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
     this.ConfigForm();
   }
 
+  GetDropdowns() {
+    this.siteService.GetAllSites().subscribe({
+      next: (site) => {
+
+        this.siteDropdown = site.map((site) => ({
+          id: site.siteID.toString(),
+          text: site.siteName
+        }));
+      }
+    });
+  }
+
   //#region  Vars
 
   showSpinner:Boolean =false;
@@ -117,66 +114,62 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
   menuItems: GenericMenuInterface[] = [];
 
   //Table
-  tableConfig!: GenericTableConfig<UserDto>;
-  dataTable: UserDto[] = [];
+  tableConfig!: GenericTableConfig<BuildingDto>;
+  dataTable: BuildingDto[] = [];
   hideTable = signal(true);
   public newTable = signal(true);
-  public dataUser = signal<UserDto>({
-    id: 0,
-    userName: '',
-    ntUser: '',
-    //employeeNumber: '',
-    email: '',
-    role: '',
+  public dataBuilding = signal<BuildingDto>({
+    buildingID: 0,
+    name: '',
+    description: '',
+    siteID: 0,
     available: false
   });
 
-  public dataUserFormTemp: UserDto = {
-    id: 0,
-    userName: '',
-    ntUser: '',
-    //employeeNumber: '',
-    email: '',
-    role: '',
+  public dataBuildingFormTemp: BuildingDto = {
+    buildingID: 0,
+    name: '',
+    description: '',
+    siteID: 0,
     available: false
   };
 
-  public userTemp = signal<UserDto>({
-    id: 0,
-    userName: '',
-    ntUser: '',
-    //employeeNumber: '',
-    email: '',
-    role: '',
+  public BuildingTemp = signal<BuildingDto>({
+    buildingID: 0,
+    name: '',
+    description: '',
+    siteID: 0,
     available: false
   });
 
-  public dataUsers = signal<UserDto[]>([]);
+  public dataBuildings = signal<BuildingDto[]>([]);
 
   public EditAdd = signal<string>('');
   public displayMaximizable: boolean = false;
 
   //Form
-  genericForm: GenericFormInterface<UserDto> = {
+  genericForm: GenericFormInterface<BuildingDto> = {
     tittle: '',
     fields: [],
     customFromGroup: undefined,
     editAdd: '',
-    data: this.dataUser()
+    data: this.dataBuilding()
   }
 
-  testForm: GenericFormInterface<UserDto> = {
+  testForm: GenericFormInterface<BuildingDto> = {
     tittle: '',
     fields: [],
     customFromGroup: undefined,
     editAdd: '',
-    data: this.userTemp()
+    data: this.BuildingTemp()
   };
 
-  builderForm = new GenericFormConcretBuilder<UserDto>();
-  builderTestForm = new GenericFormConcretBuilder<UserDto>();
+  builderForm = new GenericFormConcretBuilder<BuildingDto>();
+
   statuses: SelectOption[] = this.getEnumSelectOptions(GenericStatus);
   public submit = signal(false);
+
+  siteDropdown: SelectOption[] = [];
 
   //#endregion
 
@@ -199,14 +192,6 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
   }
 
   FillMenu(): void {
-    this.service.getStatus().subscribe({
-      next: (status) => {
-        this.statusDD = status;
-        this.selectedStatus = status[0]?.id || '1';
-        this.statusItem.item.options = this.statusDD;
-        this.statusItem.item.selectedOption = this.selectedStatus;
-      }
-    });
   }
 
   ConfigMenu(): void {
@@ -231,15 +216,15 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
 
   ConfigTable() {
     this.builderTable.Reset();
-    this.builderTable.SetTitle("User Table");
+    this.builderTable.SetTitle("Building Table");
     this.builderTable.SetDataKey("id");
     this.builderTable.SetData(this.dataTable);
     this.builderTable.SetKpis(this.GetKpis());
     this.builderTable.SetPagination(true);
     this.builderTable.SetRowsPerPage(10);
-    this.builderTable.SetRowsPerPageOptions([10, 15, 30]);
+    this.builderTable.SetRowsPerPageOptions([5, 10, 20]);
     this.builderTable.SetColumns(this.getColumns());
-    this.builderTable.SetGlobalFilterFields(["userName"]);
+    this.builderTable.SetGlobalFilterFields(["name", "description"]);
     this.tableConfig = this.builderTable.Generate();
   }
 
@@ -251,17 +236,15 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
 
   getColumns(): TableColumn[] {
     const manualColumns: TableColumn[] = [
-      { field: 'id', header: 'ID' },
-      { field: 'userName', header: 'User Name' },
-      { field: 'ntUser', header: 'NT User' },
-      //{ field: 'employeeNumber', header: 'Employee Number' },
-      { field: 'email', header: 'Email' },
-      { field: 'role', header: 'Role' },
+      { field: 'buildingID', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'description', header: 'Description' },
+      { field: 'siteID', header: 'Site ID' },
       { field: 'available', header: 'Available' }
     ];
 
     const data = this.dataTable;
-    const columnFields = Object.keys(data[0]);
+    const columnFields = Object.keys(data[0] || {});
 
     const manualFields = manualColumns.map(col => col.field);
     const filteredColumnFields = columnFields.filter(field => !manualFields.includes(field));
@@ -273,7 +256,7 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
 
     let columns: TableColumn[] = [...manualColumns, ...dataColumns];
 
-    const fieldsToHide = ["employeeNumber","roleId", "siteId"];
+    const fieldsToHide = [""];
 
     columns = columns.map(column => ({
       ...column,
@@ -290,21 +273,19 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
 
   GetTable(status: string | any, ...args: any[]): void {
     try {
-      this.service.getAllUsers().subscribe({
-        next: (usersRequest) => {
-          if (usersRequest.length < 1) {
-            usersRequest = [{
-              id: 0,
-              userName: 'No Users Found',
-              ntUser: '',
-              //employeeNumber: '',
-              email: '',
-              role: '',
+      this.service.GetAllBuildings().subscribe({
+        next: (buildingRequest) => {
+          if (buildingRequest.length < 1) {
+            buildingRequest = [{
+              buildingID: 0,
+              name: 'No building Found',
+              description: '',
+              siteID: 0,
               available: false
-            } as UserDto];
+            } as BuildingDto];
           }
 
-          const transformedUserRequest = usersRequest.map(request => ({
+          const transformedUserRequest = buildingRequest.map(request => ({
             ...request
           }));
 
@@ -337,7 +318,7 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
   //#region Form
 
   ConfigForm() {
-    this.dataUserFormTemp = this.dataUser();
+    this.dataBuildingFormTemp = this.dataBuilding();
     this.builderForm.Reset();
     this.builderForm.SetEditAdd(this.EditAdd().toString());
 
@@ -350,92 +331,59 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
       validationRequired: false,
       enable: false,
       show: false,
-      value: this.dataUser().id
+      value: this.dataBuilding().buildingID
     });
 
     this.builderForm.SetField({
-      field: 'userName',
-      label: 'User Name',
+      field: 'name',
+      label: 'Building Name',
       order: 2,
       required: true,
       type: 'text',
       validationRequired: true,
       enable: true,
       show: true,
-      value: this.dataUser().userName,
+      value: this.dataBuilding().name,
       onInputChange: (event: string) => {
-        this.dataUserFormTemp.userName = event;
+        this.dataBuildingFormTemp.name = event;
       }
     });
 
     this.builderForm.SetField({
-      field: 'ntUser',
-      label: 'NT User',
+      field: 'description',
+      label: 'Description',
       order: 3,
-      required: true,
-      type: 'text',
+      required: false,
+      type: 'textArea',
       validationRequired: false,
       enable: true,
       show: true,
-      value: this.dataUser().ntUser,
+      value: this.dataBuilding().description,
       onInputChange: (event: string) => {
-        this.dataUserFormTemp.ntUser = event;
-      }
-
-    });
-
-    // this.builderForm.SetField({
-    //   field: 'employeeNumber',
-    //   label: 'Employee Number',
-    //   order: 4,
-    //   required: true,
-    //   type: 'text',
-    //   validationRequired: true,
-    //   enable: true,
-    //   show: true,
-    //   value: this.dataUser().employeeNumber,
-    //   onInputChange: (event: string) => {
-    //     this.dataUserFormTemp.employeeNumber = event;
-    //   }
-    // });
-
-    this.builderForm.SetField({
-      field: 'email',
-      label: 'Email',
-      order: 5,
-      required: true,
-      type: 'text',
-      validationRequired: false,
-      enable: true,
-      show: true,
-      value: this.dataUser().email,
-      onInputChange: (event: string) => {
-        this.dataUserFormTemp.email = event;
+        this.dataBuildingFormTemp.description = event;
       }
     });
 
-
-    const selectRole = this.roleDropdown.find(role => role.text === this.dataUser().role || role.id === this.dataUser().role);
+    const selectSite = this.siteDropdown.find(site => site.text === this.dataBuilding().siteID.toString() || site.id === this.dataBuilding().siteID.toString());
 
     this.builderForm.SetField({
-      field: 'role',
-      label: 'Role',
-      order: 6,
+      field: 'siteID',
+      label: 'Site ID',
+      order: 4,
       required: true,
       type: 'select',
-      options: this.roleDropdown,  // [{ id: 2, text: 'Editor' }, ...]
+      options: this.siteDropdown,
       validationRequired: true,
       enable: true,
       show: true,
-      value: selectRole?.id,  // <-- el valor inicial debe ser el ID del rol
-       onInputChange: (event: string) => {
+      value: selectSite?.id,
+      onInputChange: (event: string) => {
 
-        const selectRole2 = this.roleDropdown.find(role => role.id == event);
+        const selectSite2 = this.siteDropdown.find(site => site.id == event);
         
-         this.dataUserFormTemp.role = selectRole2.text;  // Guardar el ID directamente en el objeto
+         this.dataBuildingFormTemp.siteID = Number(selectSite2.id);  // Guardar el ID directamente en el objeto
        }
     });
-
 
     this.builderForm.SetField({
       field: 'available',
@@ -446,21 +394,19 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
       validationRequired: true,
       enable: true,
       show: true,
-      value: this.dataUser().available,
+      value: this.dataBuilding().available,
       onInputChange: (event: boolean) => {
-        this.dataUserFormTemp.available = event;
+        this.dataBuildingFormTemp.available = event;
       }
     });
 
     this.builderForm.SetFormGroup(
       this.fb.group({
-        id: [this.dataUser().id],
-        userName: [this.dataUser().userName],
-        ntUser: [this.dataUser().ntUser],
-        //employeeNumber: [this.dataUser().employeeNumber],
-        email: [this.dataUser().email],
-        role: [this.dataUser().role],
-        available: [this.dataUser().available]
+        buildingID: [this.dataBuilding().buildingID],
+        name: [this.dataBuilding().name],
+        description: [this.dataBuilding().description],
+        siteID: [this.dataBuilding().siteID],
+        available: [this.dataBuilding().available]
       })
     );
 
@@ -468,108 +414,87 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
       this.SubmitRequests();
     });
 
-    this.builderForm.SetTitle('User Form');
+    this.builderForm.SetTitle('Building Form');
     this.genericForm = this.builderForm.Generate();
   }
 
   SubmitRequests(): void {
-    console.log('Se hizo Submit');
-    console.log(this.dataUser());
-
-    //  Verifica que el formulario exista y sea válido
-    if (!this.genericForm.customFromGroup || this.genericForm.customFromGroup.invalid) {
-      // Marca todos los campos como tocados para que se vean los errores
-      this.genericForm.customFromGroup?.markAllAsTouched();
-      return; // No continúes si el formulario es inválido
+      console.log('Se hizo Submit');
+      console.log(this.dataBuilding());
+  
+      if (!this.genericForm.customFromGroup || this.genericForm.customFromGroup.invalid) {
+        this.genericForm.customFromGroup?.markAllAsTouched();
+        return;
+      }
+      const formValues = this.genericForm.customFromGroup.value;
+  
+        this.dataBuilding.set({
+          buildingID: formValues.buildingID,
+          name: formValues.name,
+          description: formValues.description,
+          siteID: formValues.siteID,
+          available: formValues.available
+        });
+        
+      this.submit.set(true);   
+  
+      console.log('Se hizo Submit');
+      console.log(this.dataBuilding());
+  
+      if (this.EditAdd() == 'Add') {
+        this.service.createBuilding(this.dataBuilding()).subscribe({
+          next: (response) => {
+            this._message.add({
+              severity: 'success',
+              summary: 'Add!',
+              life: 2000
+            });
+  
+            setTimeout(() => {
+              this.GetTable(this.selectedStatus);
+            }, 1000);
+          },
+          error: () => {},
+          complete: () => {}
+        });
+      } else {
+        this.service.updateBuilding(this.dataBuildingFormTemp).subscribe({
+          next: (response) => {
+            this._message.add({
+              severity: 'success',
+              summary: 'Edit!',
+              life: 2000
+            });
+            this.GetTable(this.selectedStatus);
+          },
+          error: () => {},
+          complete: () => {}
+        });
+      }
+  
+      this.displayMaximizable = false;
+      this.dataBuildings = signal<BuildingDto[]>([]);
+      console.log(this.genericForm.data);
     }
 
-    //  Formulario válido, continuar
-    const formValues = this.genericForm.customFromGroup.value;
-      this.dataUser.set({
-        id: formValues.id,
-        userName: formValues.userName,
-        ntUser: formValues.ntUser,
-        //employeeNumber: formValues.employeeNumber,
-        email: formValues.email ?? '',
-        role: formValues.role,
-        available: formValues.available
-      });
-
-    this.submit.set(true);
-    
-
-    console.log('Se hizo Submit');
-    console.log(this.dataUser());
-    
-    if (this.EditAdd() == 'Add') {
-      //obtener el id del rol
-      const selectRole = this.roleDropdown.find(role => role.text == this.dataUserFormTemp.role);
-      this.dataUser().role = selectRole?.id;
-      console.log('Rol enviado:', this.dataUser().role);
-      this.dataUserFormTemp.id = this.dataUser().id;
-      this.dataUserFormTemp.role = selectRole?.id; 
-
-      this.service.createUser(this.dataUserFormTemp).subscribe({
-        next: (response) => {
-          this._message.add({
-            severity: 'success',
-            summary: 'Add!',
-            detail: `User ${response.message} Added`,
-            life: 2000
-          });
-
-          setTimeout(() => {
-            this.GetTable(this.selectedStatus);
-          }, 1000);
-        },
-        error: () => {},
-        complete: () => {}
-      });
-      } else {
-    // convertir lo mismo para el update
-    const selectRole = this.roleDropdown.find(role => role.text == this.dataUserFormTemp.role);
-    this.dataUser().role = selectRole?.id;
-    console.log('Rol enviado:', this.dataUser().role);
-    this.dataUserFormTemp.id = this.dataUser().id;
-    this.dataUserFormTemp.role = selectRole?.id;    
-    this.service.updateUser(this.dataUserFormTemp).subscribe({
-      next: (response) => {
-        this._message.add({
-          severity: 'success',
-          summary: 'Edit!',
-          //detail: `User ${response.message} Updated`,
-          life: 2000
-        });
-
-        this.GetTable(this.selectedStatus);
-      },
-      error: () => {},
-      complete: () => {}
-    });
-  }
-    this.displayMaximizable = false;
-    this.dataUsers = signal<UserDto[]>([]);
-    console.log(this.genericForm.data);
-  }
-
-  getModal(item: UserDto = {} as UserDto) {
+  getModal(item: BuildingDto = {} as BuildingDto) {
     this.submit.set(false);
 
-    if (item.id == 0 || item.id == undefined) {
+    if (item.buildingID == 0 || item.buildingID == undefined) {
       this.EditAdd.set('Add')
     } else {
       this.EditAdd.set('Edit')
     }
 
     if (this.EditAdd() == 'Edit') {
-      this.dataUser.set(item);
+      this.dataBuilding.set(item);
       this.ConfigForm();
       this.displayMaximizable = true;
-      let tests: UserDto;
-      this.service.getUserById(item.id).subscribe({
+      let tests: BuildingDto;
+      this.service.getBuildingById(item.buildingID).subscribe({
         next: (data) => {
           tests = data;
-          this.dataUser = signal<UserDto>(tests);
+          this.dataBuilding = signal<BuildingDto>(tests);
         },
         error: (error) => {
           console.error(error);
@@ -580,17 +505,15 @@ export class UsersPageComponent implements OnInit, GenericPageTableMenuForm<User
         }
       });
     } else {
-      const dataUserTemp: UserDto = {
-        id: 0,
-        userName: '',
-        ntUser: '',
-        //employeeNumber: '',
-        email: '',
-        role: '',
+      const dataBuildingTemp: BuildingDto = {
+        buildingID: 0,
+        name: '',
+        description: '',
+        siteID: 0,
         available: false
       }
 
-      this.dataUser.set(dataUserTemp);
+      this.dataBuilding.set(dataBuildingTemp);
       this.ConfigForm();
       this.displayMaximizable = true;
     }

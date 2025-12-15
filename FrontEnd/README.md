@@ -164,14 +164,14 @@ export class EmployeesPageComponent extends GenericPageTableMenuForm<Employee> i
   }
 
   ngOnInit(): void {
-    this.initVariables();
+    this.initVars();
     this.initMenu();
     this.initTable();
     this.initForm();
   }
 
-  initVariables(): void {
-    // Inicializa las variables necesarias
+  initVars(): void {
+    // Inicializa las Vars necesarias
   }
 
   initMenu(): void {

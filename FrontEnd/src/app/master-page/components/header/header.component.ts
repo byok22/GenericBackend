@@ -23,9 +23,10 @@ export class HeaderComponent implements OnInit {
   userInfo: JWT = { NTUser: '', Role: '' } as JWT;
   showUserDialog: boolean = false;
   userMenuItems: MenuItem[] = [];
+  selectedSiteName: string = '';
 
   constructor(
-    private _router: Router,
+    public router: Router,
     private cdr: ChangeDetectorRef
   ) {
     const token = GetToken('token');
@@ -36,6 +37,17 @@ export class HeaderComponent implements OnInit {
     } else {
       this.userInfo = { NTUser: '', Role: '' } as JWT;
       this.userID = 'GuestView';
+    }
+
+    // Leer sitio seleccionado desde localStorage (si existe)
+    try {
+      const siteJson = localStorage.getItem('selectedSite');
+      if (siteJson) {
+        const site = JSON.parse(siteJson);
+        this.selectedSiteName = site?.siteName || '';
+      }
+    } catch (err) {
+      console.error('Error parsing selectedSite from localStorage', err);
     }
   }
 
@@ -48,6 +60,15 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('userID', newUserID);
    
       this.cdr.markForCheck();
+    });
+
+    // Escuchar cambios de sitio si alguna parte de la app emite el evento
+    document.addEventListener('siteChanged', (event: any) => {
+      const site = event?.detail ?? null;
+      if (site) {
+        this.selectedSiteName = site.siteName || '';
+        this.cdr.markForCheck();
+      }
     });
 
     this.initializeUserMenuItems();
@@ -87,7 +108,7 @@ export class HeaderComponent implements OnInit {
 
   private handleLogIn() {
     DeleteToken('token');
-    this._router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   handleLogOut() {
@@ -100,7 +121,7 @@ export class HeaderComponent implements OnInit {
     this.userInfo = { NTUser: '', Role: '' } as JWT;
     this.userID = 'GuestView';
     this.cdr.markForCheck();
-    this._router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   openUserInfo() {

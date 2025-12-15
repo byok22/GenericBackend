@@ -127,7 +127,7 @@ export class AppScreensPageComponent implements OnInit, GenericPageTableMenuForm
     this.ConfigForm();
   }
 
-  //#region  Variables
+  //#region  Vars
   showSpinner: Boolean = false;
 
   //Menu

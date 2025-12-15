@@ -5,5 +5,6 @@ export interface UserDto {
   employeeNumber: string;
   email?: string;
   role: string;
+  siteId: number;
   available: boolean;
 }

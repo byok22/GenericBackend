@@ -14,6 +14,7 @@ export interface UserStorage {
 export class LocalStorageService {
 
   private readonly USER_KEY = 'loggedInUser';
+  private readonly SITE_KEY = 'selectedSite';
 
   constructor() { }
 
@@ -31,6 +32,22 @@ export class LocalStorageService {
   // Elimina el usuario del localStorage (logout)
   removeUser(): void {
     localStorage.removeItem(this.USER_KEY);
+  }
+
+  // Guarda el sitio seleccionado
+  setSite(site: any): void {
+    localStorage.setItem(this.SITE_KEY, JSON.stringify(site));
+  }
+
+  // Obtiene el sitio seleccionado
+  getSite(): any | null {
+    const siteJson = localStorage.getItem(this.SITE_KEY);
+    return siteJson ? JSON.parse(siteJson) : null;
+  }
+
+  // Elimina el sitio seleccionado
+  removeSite(): void {
+    localStorage.removeItem(this.SITE_KEY);
   }
 
   // Verifica si hay un usuario logeado

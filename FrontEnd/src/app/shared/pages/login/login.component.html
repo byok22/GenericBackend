@@ -10,6 +10,13 @@
       <input type="text" pInputText class="form-control" id="username" placeholder="Enter NT User" formControlName="ntuser">
     </div>
     <div class="form-group" style="margin-top: 8px;">
+      <label class="labelsMenu" for="site">Site </label>
+      <select id="site" class="form-control" formControlName="site">
+        <option [ngValue]="null">-- Select Site --</option>
+        <option *ngFor="let s of sites" [ngValue]="s">{{ s.siteName }}</option>
+      </select>
+    </div>
+    <div class="form-group" style="margin-top: 8px;">
       <label class="labelsMenu" for="password">Password</label>
      
 

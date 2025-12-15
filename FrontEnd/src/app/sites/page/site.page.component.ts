@@ -20,12 +20,11 @@ import { GenericFormInterface } from '../../shared/components/generic-form/gener
 import { GenericFormConcretBuilder } from '../../shared/components/generic-form/builder/generic-form-concret-builder';
 import { GenericStatus } from '../../shared/enums/generic-status.enum';
 import { FormBuilder } from '@angular/forms';
-//import { RolesService } from '../../../Roles/services/Roles.service';
 import { MessageService } from 'primeng/api';
 
 import { GenericTableConcretBuilder } from '../../shared/components/generic-table/builder/generic-table-concret-builder';
-import { RoleDto } from '../interfaces/role-dto';
-import { RoleCatalogoService } from '../services/role-catalogo.service';
+import { SiteDto } from '../interfaces/site-dto';
+import { SiteCatalogoService } from '../services/site-catalogo.service';
 import { DropdownsService } from '../../common/service/dropdowns.service';
 import { GenericPageTableMenuForm } from '../../common/interfaces/generic-page-table-menu-form';
 
@@ -34,11 +33,10 @@ import { GenericPageTableMenuForm } from '../../common/interfaces/generic-page-t
 
 //#region  Inits
 @Component({
-  selector: 'role-page',
+  selector: 'site-page',
   standalone: true,
   imports: [
     CommonModule, 
-    //GenericMenuComponent, 
     GenericTableComponent, 
     HttpClientModule, 
     GenericTitleComponent, 
@@ -47,46 +45,36 @@ import { GenericPageTableMenuForm } from '../../common/interfaces/generic-page-t
     FontAwesomeModule
   ],
   providers: [DatePipe, DropdownsService, MessageService],
-  templateUrl: './role.page.component.html',
-  styleUrl: './role.page.component.css',
+  templateUrl: './site.page.component.html',
+  styleUrl: './site.page.component.css',
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<RoleDto> {
+export class SitesPageComponent implements OnInit, GenericPageTableMenuForm<SiteDto> {
 
-  builderTable: GenericTableConcretBuilder<RoleDto>;
+  builderTable: GenericTableConcretBuilder<SiteDto>;
 
   constructor(
-    private service : RoleCatalogoService,
-    //private RoleService: RolesService,
+    private service : SiteCatalogoService,
     private serviceTable: TableBuilderFactoryService,  
     private fb: FormBuilder,
     private _message: MessageService ,  
   ) {
     this.FillMenu();
     this.ConfigMenu();
-    //this.GetDropdowns();
-    this.builderTable = this.serviceTable.createBuilder<RoleDto>();
+    this.builderTable = this.serviceTable.createBuilder<SiteDto>();
   }
 
-  // GetDropdowns() {
-  //   this.roleService.getRolesDropdown().subscribe({
-  //     next: (role) => {
-  //       this.roleDropdown = role;
-  //     }
-  //   });
-  // }
+  siteDropdown: SelectOption[] = [];
 
-  roleDropdown: SelectOption[] = [];
-
-  dataForm: WritableSignal<RoleDto> = signal({
-    pkRole: 0,
-    roleName: '',
+  dataForm: WritableSignal<SiteDto> = signal({
+    siteID: 0,
+    siteName: '',
     available: false
   });
 
-  dataFormTemp: WritableSignal<RoleDto> = signal({
-    pkRole: 0,
-    roleName: '',
+  dataFormTemp: WritableSignal<SiteDto> = signal({
+    siteID: 0,
+    siteName: '',
     available: false
   });
 
@@ -107,52 +95,52 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
   menuItems: GenericMenuInterface[] = [];
 
   //Table
-  tableConfig!: GenericTableConfig<RoleDto>;
-  dataTable: RoleDto[] = [];
+  tableConfig!: GenericTableConfig<SiteDto>;
+  dataTable: SiteDto[] = [];
   hideTable = signal(true);
   public newTable = signal(true);
-  public dataRole = signal<RoleDto>({
-    pkRole: 0,
-    roleName: '',
+  public dataSite = signal<SiteDto>({
+    siteID: 0,
+    siteName: '',
     available: false
   });
 
-  public dataRoleFormTemp: RoleDto = {
-    pkRole: 0,
-    roleName: '',
+  public dataSiteFormTemp: SiteDto = {
+    siteID: 0,
+    siteName: '',
     available: false
   };
 
-  public RoleTemp = signal<RoleDto>({
-    pkRole: 0,
-    roleName: '',
+  public SiteTemp = signal<SiteDto>({
+    siteID: 0,
+    siteName: '',
     available: false
   });
 
-  public dataRoles = signal<RoleDto[]>([]);
+  public dataSites = signal<SiteDto[]>([]);
 
   public EditAdd = signal<string>('');
   public displayMaximizable: boolean = false;
 
   //Form
-  genericForm: GenericFormInterface<RoleDto> = {
+  genericForm: GenericFormInterface<SiteDto> = {
     tittle: '',
     fields: [],
     customFromGroup: undefined,
     editAdd: '',
-    data: this.dataRole()
+    data: this.dataSite()
   }
 
-  testForm: GenericFormInterface<RoleDto> = {
+  testForm: GenericFormInterface<SiteDto> = {
     tittle: '',
     fields: [],
     customFromGroup: undefined,
     editAdd: '',
-    data: this.RoleTemp()
+    data: this.SiteTemp()
   };
 
-  builderForm = new GenericFormConcretBuilder<RoleDto>();
-  builderTestForm = new GenericFormConcretBuilder<RoleDto>();
+  builderForm = new GenericFormConcretBuilder<SiteDto>();
+  builderTestForm = new GenericFormConcretBuilder<SiteDto>();
   statuses: SelectOption[] = this.getEnumSelectOptions(GenericStatus);
   public submit = signal(false);
 
@@ -177,14 +165,6 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
   }
 
   FillMenu(): void {
-    // this.service.getRoles().subscribe({
-    //   next: (status) => {
-    //     this.statusDD = status;
-    //     this.selectedStatus = status[0]?.id || '1';
-    //     this.statusItem.item.options = this.statusDD;
-    //     this.statusItem.item.selectedOption = this.selectedStatus;
-    //   }
-    // });
   }
 
   ConfigMenu(): void {
@@ -209,7 +189,7 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
 
   ConfigTable() {
     this.builderTable.Reset();
-    this.builderTable.SetTitle("Role Table");
+    this.builderTable.SetTitle("Site Table");
     this.builderTable.SetDataKey("id");
     this.builderTable.SetData(this.dataTable);
     this.builderTable.SetKpis(this.GetKpis());
@@ -217,7 +197,7 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
     this.builderTable.SetRowsPerPage(10);
     this.builderTable.SetRowsPerPageOptions([5, 10, 20]);
     this.builderTable.SetColumns(this.getColumns());
-    this.builderTable.SetGlobalFilterFields(["roleName"]);
+    this.builderTable.SetGlobalFilterFields(["siteName"]);
     this.tableConfig = this.builderTable.Generate();
   }
 
@@ -229,13 +209,13 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
 
   getColumns(): TableColumn[] {
     const manualColumns: TableColumn[] = [
-      { field: 'pkRole', header: 'ID' },
-      { field: 'roleName', header: 'Roles Name' },
+      { field: 'siteID', header: 'ID' },
+      { field: 'siteName', header: 'Site Name' },
       { field: 'available', header: 'Available' }
     ];
 
     const data = this.dataTable;
-    const columnFields = Object.keys(data[0]);
+    const columnFields = Object.keys(data[0] || {});
 
     const manualFields = manualColumns.map(col => col.field);
     const filteredColumnFields = columnFields.filter(field => !manualFields.includes(field));
@@ -264,17 +244,17 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
 
   GetTable(status: string | any, ...args: any[]): void {
     try {
-      this.service.GetAllRole().subscribe({
-        next: (roleRequest) => {
-          if (roleRequest.length < 1) {
-            roleRequest = [{
-              pkRole: 0,
-              roleName: 'No role Found',
+      this.service.GetAllSites().subscribe({
+        next: (siteRequest) => {
+          if (siteRequest.length < 1) {
+            siteRequest = [{
+              siteID: 0,
+              siteName: 'No site Found',
               available: false
-            } as RoleDto];
+            } as SiteDto];
           }
 
-          const transformedUserRequest = roleRequest.map(request => ({
+          const transformedUserRequest = siteRequest.map(request => ({
             ...request
           }));
 
@@ -307,7 +287,7 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
   //#region Form
 
   ConfigForm() {
-    this.dataRoleFormTemp = this.dataRole();
+    this.dataSiteFormTemp = this.dataSite();
     this.builderForm.Reset();
     this.builderForm.SetEditAdd(this.EditAdd().toString());
 
@@ -320,21 +300,21 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
       validationRequired: false,
       enable: false,
       show: false,
-      value: this.dataRole().pkRole
+      value: this.dataSite().siteID
     });
 
     this.builderForm.SetField({
-      field: 'roleName',
-      label: 'Role Name',
+      field: 'siteName',
+      label: 'Site Name',
       order: 2,
       required: true,
       type: 'text',
       validationRequired: true,
       enable: true,
       show: true,
-      value: this.dataRole().roleName,
+      value: this.dataSite().siteName,
       onInputChange: (event: string) => {
-        this.dataRoleFormTemp.roleName = event;
+        this.dataSiteFormTemp.siteName = event;
       }
     });
 
@@ -347,17 +327,17 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
       validationRequired: true,
       enable: true,
       show: true,
-      value: this.dataRole().available,
+      value: this.dataSite().available,
       onInputChange: (event: boolean) => {
-        this.dataRoleFormTemp.available = event;
+        this.dataSiteFormTemp.available = event;
       }
     });
 
     this.builderForm.SetFormGroup(
       this.fb.group({
-        pkRole: [this.dataRole().pkRole],
-        roleName: [this.dataRole().roleName],
-        available: [this.dataRole().available]
+        siteID: [this.dataSite().siteID],
+        siteName: [this.dataSite().siteName],
+        available: [this.dataSite().available]
       })
     );
 
@@ -365,41 +345,37 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
       this.SubmitRequests();
     });
 
-    this.builderForm.SetTitle('Role Form');
+    this.builderForm.SetTitle('Site Form');
     this.genericForm = this.builderForm.Generate();
   }
 
   SubmitRequests(): void {
       console.log('Se hizo Submit');
-      console.log(this.dataRole());
+      console.log(this.dataSite());
   
-      //  Verifica que el formulario exista y sea válido
       if (!this.genericForm.customFromGroup || this.genericForm.customFromGroup.invalid) {
-        // Marca todos los campos como tocados para que se vean los errores
         this.genericForm.customFromGroup?.markAllAsTouched();
-        return; // No continúes si el formulario es inválido
+        return;
       }
-      //  Formulario válido, continuar
       const formValues = this.genericForm.customFromGroup.value;
   
-        this.dataRole.set({
-          pkRole: formValues.pkRole,
-          roleName: formValues.roleName,
+        this.dataSite.set({
+          siteID: formValues.siteID,
+          siteName: formValues.siteName,
           available: formValues.available
         });
         
       this.submit.set(true);   
   
       console.log('Se hizo Submit');
-      console.log(this.dataRole());
+      console.log(this.dataSite());
   
       if (this.EditAdd() == 'Add') {
-        this.service.createRole(this.dataRole()).subscribe({
+        this.service.createSite(this.dataSite()).subscribe({
           next: (response) => {
             this._message.add({
               severity: 'success',
               summary: 'Add!',
-              //detail: `Status ${response.message} Added`,
               life: 2000
             });
   
@@ -411,12 +387,11 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
           complete: () => {}
         });
       } else {
-        this.service.updateRole(this.dataRoleFormTemp).subscribe({
+        this.service.updateSite(this.dataSiteFormTemp).subscribe({
           next: (response) => {
             this._message.add({
               severity: 'success',
               summary: 'Edit!',
-              //detail: `Status ${response.message} Updated`,
               life: 2000
             });
             this.GetTable(this.selectedStatus);
@@ -427,28 +402,28 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
       }
   
       this.displayMaximizable = false;
-      this.dataRoles = signal<RoleDto[]>([]);
+      this.dataSites = signal<SiteDto[]>([]);
       console.log(this.genericForm.data);
     }
 
-  getModal(item: RoleDto = {} as RoleDto) {
+  getModal(item: SiteDto = {} as SiteDto) {
     this.submit.set(false);
 
-    if (item.pkRole == 0 || item.pkRole == undefined) {
+    if (item.siteID == 0 || item.siteID == undefined) {
       this.EditAdd.set('Add')
     } else {
       this.EditAdd.set('Edit')
     }
 
     if (this.EditAdd() == 'Edit') {
-      this.dataRole.set(item);
+      this.dataSite.set(item);
       this.ConfigForm();
       this.displayMaximizable = true;
-      let tests: RoleDto;
-      this.service.getRoleById(item.pkRole).subscribe({
+      let tests: SiteDto;
+      this.service.getSiteById(item.siteID).subscribe({
         next: (data) => {
           tests = data;
-          this.dataRole = signal<RoleDto>(tests);
+          this.dataSite = signal<SiteDto>(tests);
         },
         error: (error) => {
           console.error(error);
@@ -459,13 +434,13 @@ export class RolesPageComponent implements OnInit, GenericPageTableMenuForm<Role
         }
       });
     } else {
-      const dataRoleTemp: RoleDto = {
-        pkRole: 0,
-        roleName: '',
+      const dataSiteTemp: SiteDto = {
+        siteID: 0,
+        siteName: '',
         available: false
       }
 
-      this.dataRole.set(dataRoleTemp);
+      this.dataSite.set(dataSiteTemp);
       this.ConfigForm();
       this.displayMaximizable = true;
     }

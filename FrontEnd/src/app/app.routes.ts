@@ -43,6 +43,22 @@ export const routes: Routes = [
           ),
         canActivate: [roleGuard],
         data: { permission: 'Roles' } // Coincide con el JSON "name": "Roles"
+      },
+      {
+        path: 'site-catalog',
+        loadComponent: () => import('./sites/page/site.page.component').then(
+            (m) => m.SitesPageComponent
+          ),
+        canActivate: [roleGuard],
+        data: { permission: 'Sites' } // Coincide con el JSON "name": "Sites"
+      },
+      {
+        path: 'building-catalog',
+        loadComponent: () => import('./buildings/page/building.page.component').then(
+            (m) => m.BuildingsPageComponent
+          ),
+        canActivate: [roleGuard],
+        data: { permission: 'Buildings' } // Coincide con el JSON "name": "Buildings"
       },    
       // --- ADMIN (Hijos de "Admin" en el JSON) ---
       {

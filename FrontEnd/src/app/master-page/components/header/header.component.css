@@ -4,3 +4,77 @@
     border-radius: 4px;
     font-size: 14px;
 }
+
+.header-right {
+    display: flex block;
+    align-items: center;
+    gap: 16px;
+}
+/* Contenedor cuadrado estilo "Card" */
+.site-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background-color: #ffffff; /* Fondo blanco para limpieza */
+    padding: 2px 2px 2px 12px; /* Espacio para el texto a la izq, botón pegado a la der */
+    border-radius: 4px; /* IGUAL que tu botón de usuario */
+    border: 1px solid #ced4da; /* Borde gris estándar de Bootstrap/PrimeNG */
+    height: 38px; /* Altura forzada para alinear con el botón de usuario */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Sombra muy sutil */
+}
+
+/* El texto del sitio */
+.current-site-badge {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.site-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #6c757d;
+    font-weight: 700;
+}
+
+.site-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #003865; /* Tu azul corporativo */
+    white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+}
+
+.site-icon {
+    font-size: 11px;
+    margin-right: 4px;
+    color: #003865;
+}
+
+/* Ajuste al botón de cambiar sitio para que sea cuadrado también */
+.change-site-btn.p-button {
+    border-radius: 3px !important; /* Casi cuadrado */
+    font-size: 12px !important;
+    padding: 0 10px !important;
+    height: 32px; /* Un poco más chico que el contenedor para dejar margen */
+    background-color: #f8f9fa !important;
+    border-color: #e9ecef !important;
+    color: #495057 !important;
+}
+
+.change-site-btn.p-button:hover {
+    background-color: #e2e6ea !important;
+    border-color: #dae0e5 !important;
+    color: #212529 !important;
+}
+
+/* Animación de entrada */
+.site-group.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-5px); }
+    to { opacity: 1; transform: translateX(0); }
+}

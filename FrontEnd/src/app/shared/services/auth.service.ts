@@ -93,7 +93,8 @@ export class AuthService {
       userName: '',
       employeeNumber: '',
       role: '',
-      available: false
+      available: false,
+      siteId: 0
     }
     return user;
   }
@@ -151,7 +152,8 @@ export class AuthService {
       id: 0,
       userName: '',
       employeeNumber: '',
-      role: ''
+      role: '',
+      siteId: 0
     }
     if(!localStorage.getItem('token')||!localStorage.getItem('user') ) return of(currentUser);
 
