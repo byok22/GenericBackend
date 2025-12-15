@@ -4,6 +4,8 @@ namespace Shared.Dtos.Login
     {
         public required string NtUser { get; set; }
         public required string Password { get; set; }
+
+        public int SiteId { get; set; }
     }
 }
     

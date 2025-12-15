@@ -40,6 +40,9 @@ namespace Application.Services
         public string Role =>
             _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Role)?.Value ?? "Unknown";
 
+        public string SiteId =>
+            _httpContextAccessor.HttpContext?.User?.FindFirst("SiteId")?.Value ?? "0";
+
         /// <summary>
         /// Obtiene el usuario actual completo. 
         /// La primera llamada en un request va a la BD.
@@ -65,7 +68,7 @@ namespace Application.Services
             try
             {
                 // 2. Si es la primera vez, vamos a la base de datos
-                var userDto = await _getUsersByWindowsIdUseCase.Execute(windowsId);
+                var userDto = await _getUsersByWindowsIdUseCase.Execute(windowsId, SiteId != "0" ? int.Parse(SiteId) : 0);
                 _cachedUser = _mapper.Map<User>(userDto); // Guardamos el resultado
             }
             catch (Exception ex)

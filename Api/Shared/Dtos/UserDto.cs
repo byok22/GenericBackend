@@ -9,5 +9,8 @@ namespace Shared.Dtos
         public string? Email{get; set; }
         public string Role {get;set;}  = string.Empty;
         public bool Available {get;set;}
+
+                public int RoleId {get;set;}
+        public int SiteId {get;set;}        
     }
 }

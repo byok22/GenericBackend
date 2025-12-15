@@ -62,7 +62,7 @@ namespace Application.UseCases.AuthUseCases
               
 
                 // Find in your database if the user exists and complete the response
-                var user = await _getUsersByWindowsIdUseCase.Execute(request.NtUser);
+                var user = await _getUsersByWindowsIdUseCase.Execute(request.NtUser, request.SiteId);
              // User user = new User();
                 //If user is inactivated
                 if(user != null && !user.Available){

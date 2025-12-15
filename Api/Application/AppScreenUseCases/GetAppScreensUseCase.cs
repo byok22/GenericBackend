@@ -1,4 +1,5 @@
 using AutoMapper;
+using Domain.Models;
 using Domain.Repositories;
 using Domain.Services;
 using Shared.Dtos;
@@ -17,7 +18,7 @@ namespace Application.AppScreenUseCases
         {
             var Userd = await _currentUserService.GetCurrentUserAsync();
 
-            var dtos = await _repository.GetAppScreensByNtUser(Userd.NTUser);
+            var dtos = await _repository.GetAppScreensByNtUser(Userd.NTUser, Userd.SiteId);
             return _mapper.Map<List<AppScreenDto>>(dtos);
         }
     }

@@ -37,7 +37,7 @@ namespace Infrastructure.Repositories
 
                 return new Building
                 {
-                    BuildingID = result.Rows[0].Field<int>("PKBuilding"),
+                    BuildingID = Convert.ToInt32(result.Rows[0]["PKBuilding"]),
                     Name = result.Rows[0].Field<string>("Name") ?? string.Empty,
                     Description = result.Rows[0].Field<string>("Description"),
                     SiteID = result.Rows[0].Field<int?>("FKSite") ?? 0,

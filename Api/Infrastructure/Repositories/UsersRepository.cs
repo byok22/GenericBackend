@@ -25,10 +25,11 @@ namespace Infrastructure.Repositories
             try
             {
                 SqlParameter[] parameters = {
-                    new SqlParameter("@UserName", entity.UserName),
-                    new SqlParameter("@NTUser", entity.NTUser ?? (object)DBNull.Value),
-                    new SqlParameter("@Email", entity.Email ?? (object)DBNull.Value),
-                    new SqlParameter("@Role", entity.Role),
+                    new SqlParameter("@NTUser", entity.NTUser ?? ""),
+                    new SqlParameter("@UserName", entity.UserName),                    
+                    new SqlParameter("@Email", entity.Email ?? ""),
+                    new SqlParameter("@RoleId", entity.RoleId),
+                    new SqlParameter("@SiteId", entity.SiteId),
                     new SqlParameter("@Available", entity.Available),
                     new SqlParameter("@CreatedBy", entity.CreatedBy??"")
 
@@ -42,7 +43,10 @@ namespace Infrastructure.Repositories
                     UserName = result.Rows[0].Field<string>("UserName") ?? string.Empty,
                     NTUser = result.Rows[0].Field<string>("NTAccount"),                   
                     Email = result.Rows[0].Field<string>("Email"),
+                   
                     Role = result.Rows[0].Field<string>("Role")?? string.Empty,
+                    SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
                     Available = result.Rows[0].Field<bool>("Available"),
                     
                 };
@@ -85,6 +89,8 @@ namespace Infrastructure.Repositories
                         
                         Email = row.Field<string>("Email"),
                         Role = row.Field<string>("Role") ?? string.Empty,
+                         SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
                         Available = row.Field<bool?>("Available") ?? false,
                        
                     });
@@ -99,12 +105,13 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(int id, int siteId)
         {
             try
             {
                 SqlParameter[] parameters = {
-                    new SqlParameter("@Id", id)
+                    new SqlParameter("@Id", id),
+                    new SqlParameter("@SiteId", siteId)
                 };
 
                 DataTable result = await _dbConnect.GetDataSPAsync("up_GetUserById", parameters);
@@ -124,6 +131,8 @@ namespace Infrastructure.Repositories
                     
                     Email = row.Field<string>("Email"),
                     Role = row.Field<string>("Role") ?? string.Empty,
+                     SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
                     Available = row.Field<bool?>("Available") ?? false,
                     
                 };
@@ -143,8 +152,9 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@Id", entity.Id),
                     new SqlParameter("@NTUser", entity.NTUser ?? (object)DBNull.Value),
                     new SqlParameter("@UserName", entity.UserName),
-                    new SqlParameter("@Email", entity.Email ?? (object)DBNull.Value),
-                    new SqlParameter("@FKRole", entity.Role),
+                    new SqlParameter("@Email", entity.Email ?? (object)DBNull.Value),                    
+                    new SqlParameter("@RoleId", entity.RoleId),
+                    new SqlParameter("@SiteId", entity.SiteId),
                     new SqlParameter("@Available", entity.Available),
                     
                 };
@@ -212,6 +222,8 @@ namespace Infrastructure.Repositories
                     
                     Email = row.Field<string>("Email"),
                     Role = row.Field<string>("Role") ?? string.Empty,
+                     SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
                     Available = row.Field<bool>("Available"),
                    
                 };
@@ -245,6 +257,8 @@ namespace Infrastructure.Repositories
                     NTUser = row.Field<string>("NTUser"),                   
                     Email = row.Field<string>("Email"),
                     Role = row.Field<string>("Role") ?? string.Empty,
+                     SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
                     Available = row.Field<bool>("Available"),
                     
                 };
@@ -256,12 +270,52 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<User> GetByNTUser(string ntUser)
+        public async Task<IEnumerable<User>> GetAllBySiteAsync(int siteId)
+        {
+            try
+            {
+                // Enviamos el SiteId al SP
+                SqlParameter[] parameters = { new SqlParameter("@SiteId", siteId) };
+                
+                // Llamamos al nuevo SP filtrado
+                DataTable result = await _dbConnect.GetDataSPAsync("up_GetUsersBySite", parameters);
+                
+                List<User> usersList = new List<User>();
+
+                foreach (DataRow row in result.Rows)
+                {
+                    usersList.Add(new User
+                    {
+                        Id = row.Field<int?>("Id") ?? 0,
+                        UserName = row.Field<string>("UserName") ?? string.Empty,
+                        NTUser = row.Field<string>("NTAccount"),
+                        
+                        Email = row.Field<string>("Email"),
+                        Role = row.Field<string>("Role") ?? string.Empty,
+                         SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
+                        Available = row.Field<bool?>("Available") ?? false,
+                       
+                    });
+                }
+
+                return usersList;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting all users");
+                throw;
+            }
+        }
+
+
+        public async Task<User> GetByNTUser(string ntUser, int siteId)
         {
             try
             {
             SqlParameter[] parameters = {
-                new SqlParameter("@NTUser", ntUser)
+                new SqlParameter("@NTUser", ntUser),
+                new SqlParameter("@SiteId", siteId)
             };
 
             DataTable result = await _dbConnect.GetDataSPAsync("up_GetUserByNTUser", parameters);
@@ -281,6 +335,8 @@ namespace Infrastructure.Repositories
                 
                 Email = row.Field<string>("Email"),
                 Role = row.Field<string>("Role") ?? string.Empty,
+                 SiteId = result.Rows[0].Field<int>("SiteId"),
+                     RoleId = result.Rows[0].Field<int>("RoleId"),
                 Available = row.Field<bool>("Available"),
                 
             };
@@ -290,6 +346,11 @@ namespace Infrastructure.Repositories
             _logger.LogError(ex, "Error getting user by NTUser");
             throw;
             }
+        }
+
+        public Task<User> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

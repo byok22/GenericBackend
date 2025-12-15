@@ -77,17 +77,23 @@ namespace Presentation.Api
         }
 
         //[Authorize(Roles = "Admin,Developer")]
+        // El endpoint sigue igual, pero internamente ahora es seguro
         [HttpGet("all")]
         public async Task<ActionResult<List<UserDto>>> GetAllUsers()
         {
             try
             {
-                var result = await _getAllUsers.Execute();
+                // Esto ahora ejecutará la lógica filtrada por SiteId
+                var result = await _getAllUsers.Execute(); 
                 return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting all users");
+                _logger.LogError(ex, "Error getting users");
                 return StatusCode(500, new GenericResponse { IsSuccessful = false, Message = ex.Message });
             }
         }

@@ -21,6 +21,19 @@ namespace Application.UserUseCases
             var User = _mapper.Map<Domain.Models.User>(request);
             User.CreatedBy =Userd != null? Userd.NTUser:"System";
             var user = _mapper.Map<Domain.Models.User>(request);
+
+            var roleId = int.TryParse(user.Role ?? "0", out var rId) ? rId : 0;
+            if (roleId == 0)
+            {
+                return new GenericResponse
+                {
+                    IsSuccessful = false,
+                    Message = "Invalid Role"
+                };
+            }
+            user.RoleId = roleId;
+            user.CreatedBy = Userd != null ? Userd.NTUser : "System";
+            user.SiteId = Userd != null ? Userd.SiteId : 0;
             var response = await _repository.AddAsync(user);
             if(response.Id>0)
             {

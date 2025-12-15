@@ -16,6 +16,30 @@ namespace Application.UserUseCases
             try
             {
                 var user = _mapper.Map<User>(objs);
+                if(user == null || user.NTUser ==null || user.NTUser=="")
+                {
+                    return new GenericResponse
+                    {
+                        IsSuccessful = false,
+                        Message = "User not found"
+                    };
+                }
+                var oldUser = await _repository.GetByNTUser(user.NTUser, user.SiteId);
+                var roleId = int.TryParse(user.Role ?? "0", out var rId) ? rId : 0;
+
+
+                if(roleId == 0)
+                {
+                    return new GenericResponse
+                    {
+                        IsSuccessful = false,
+                        Message = "Invalid Role"
+                    };
+                }
+                user.RoleId = roleId;
+                user.SiteId = oldUser.SiteId; // Preserve existing SiteId
+
+                
                 var result = await _repository.UpdateAsync(user);
 
                 return new GenericResponse

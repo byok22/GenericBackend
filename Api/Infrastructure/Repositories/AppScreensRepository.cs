@@ -213,12 +213,13 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<List<AppScreen>> GetAppScreensByNtUser(string? nTUser)
+        public async Task<List<AppScreen>> GetAppScreensByNtUser(string? nTUser, int siteId)
         {
            try
             {
                    SqlParameter[] parameters = {
-                    new SqlParameter("@ntUser", nTUser)
+                    new SqlParameter("@ntUser", nTUser),
+                    new SqlParameter("@SiteId", siteId)
                 };
             
             

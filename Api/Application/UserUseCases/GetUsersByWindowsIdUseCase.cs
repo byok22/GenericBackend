@@ -15,9 +15,9 @@ namespace Application.UserUseCases
           
         }
 
-       public async Task<UserDto> Execute(string windowsID)
+       public async Task<UserDto> Execute(string windowsID, int siteId)
             {
-                var user = await _repository.GetByNTUser(windowsID);
+                var user = await _repository.GetByNTUser(windowsID, siteId);
                 if (user == null) return null;
 
                 var dto = _mapper.Map<UserDto>(user);

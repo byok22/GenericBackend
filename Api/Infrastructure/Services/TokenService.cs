@@ -23,6 +23,7 @@ namespace Infrastructure.Services
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.NTUser),
                 new Claim(ClaimTypes.Role, user.Role),
+                new Claim("SiteId", user.SiteId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 // Add other claims as needed
             };
@@ -61,6 +62,7 @@ namespace Infrastructure.Services
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.NTUser),
                     new Claim(ClaimTypes.Role, user.Role),
+                     new Claim("SiteId", user.SiteId.ToString()),
                     new Claim("type", "refresh") // Opcional: marca para diferenciarlo
                 }),
                 // IMPORTANTE: Este dura 7 días (o lo que decidas), el otro dura 15 min
