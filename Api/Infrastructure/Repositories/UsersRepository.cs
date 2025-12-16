@@ -156,6 +156,7 @@ namespace Infrastructure.Repositories
                     new SqlParameter("@RoleId", entity.RoleId),
                     new SqlParameter("@SiteId", entity.SiteId),
                     new SqlParameter("@Available", entity.Available),
+                    new SqlParameter("@UpdatedBy", entity.UpdatedBy ?? "System")
                     
                 };
 

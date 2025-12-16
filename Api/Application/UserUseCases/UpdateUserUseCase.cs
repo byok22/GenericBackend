@@ -3,16 +3,22 @@ using Domain.Models;
 using Shared.Dtos;
 using Shared.Response;
 using Domain.Repositories;
+using Domain.Services;
 
 namespace Application.UserUseCases
 {
     public class UpdateUserUseCase : UserGenericUseCase
     {
-        public UpdateUserUseCase(IUsersRepository repository, IMapper mapper) : base(repository, mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdateUserUseCase(IUsersRepository repository, IMapper mapper, ICurrentUserService currentUserService) : base(repository, mapper)
         {
+            _currentUserService = currentUserService;
         }
         public async Task<GenericResponse> Execute(UserDto objs)
-        {                                       
+        {       
+            var Userd =await  _currentUserService.GetCurrentUserAsync();
+        
+                                        
             try
             {
                 var user = _mapper.Map<User>(objs);
@@ -36,6 +42,8 @@ namespace Application.UserUseCases
                         Message = "Invalid Role"
                     };
                 }
+                user.UpdatedBy = Userd != null ? Userd.NTUser : "System";
+                user.UpdatedAt = DateTime.Now;
                 user.RoleId = roleId;
                 user.SiteId = oldUser.SiteId; // Preserve existing SiteId
 
